@@ -1,0 +1,573 @@
+2026-01-21T15:35:02.000000000Z [inf]  Starting Container
+2026-01-21T15:35:02.264714080Z [inf]  Running migrations...
+2026-01-21T15:35:02.418480280Z [inf]
+2026-01-21T15:35:02.418490424Z [inf]     INFO  Nothing to migrate.
+2026-01-21T15:35:02.418498549Z [inf]
+2026-01-21T15:35:02.503504928Z [inf]  Caching configuration...
+2026-01-21T15:35:02.627307606Z [inf]
+2026-01-21T15:35:02.627313135Z [inf]     INFO  Configuration cached successfully.
+2026-01-21T15:35:02.627317197Z [inf]
+2026-01-21T15:35:02.774637139Z [inf]
+2026-01-21T15:35:02.774642021Z [inf]     INFO  Routes cached successfully.
+2026-01-21T15:35:02.774649779Z [inf]
+2026-01-21T15:35:02.974508074Z [inf]
+2026-01-21T15:35:02.974515045Z [inf]
+2026-01-21T15:35:02.974519585Z [inf]     INFO  Blade templates cached successfully.
+2026-01-21T15:35:02.974523221Z [inf]
+2026-01-21T15:35:02.974526886Z [inf]  Starting Apache...
+2026-01-21T15:35:02.974530947Z [inf]  Enabled Apache Modules:
+2026-01-21T15:35:03.150813035Z [inf]  total 0
+2026-01-21T15:35:03.150827852Z [inf]  lrwxrwxrwx 1 root root 36 Jan 15 23:01 access_compat.load -> ../mods-available/access_compat.load
+2026-01-21T15:35:03.150836319Z [inf]  lrwxrwxrwx 1 root root 28 Jan 15 23:01 alias.conf -> ../mods-available/alias.conf
+2026-01-21T15:35:03.150845025Z [inf]  lrwxrwxrwx 1 root root 28 Jan 15 23:01 alias.load -> ../mods-available/alias.load
+2026-01-21T15:35:03.150853232Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 auth_basic.load -> ../mods-available/auth_basic.load
+2026-01-21T15:35:03.150861357Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authn_core.load -> ../mods-available/authn_core.load
+2026-01-21T15:35:03.150868264Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authn_file.load -> ../mods-available/authn_file.load
+2026-01-21T15:35:03.150875537Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authz_core.load -> ../mods-available/authz_core.load
+2026-01-21T15:35:03.150883246Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authz_host.load -> ../mods-available/authz_host.load
+2026-01-21T15:35:03.150892046Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authz_user.load -> ../mods-available/authz_user.load
+2026-01-21T15:35:03.150899593Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 autoindex.conf -> ../mods-available/autoindex.conf
+2026-01-21T15:35:03.150906501Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 autoindex.load -> ../mods-available/autoindex.load
+2026-01-21T15:35:03.150914595Z [inf]  lrwxrwxrwx 1 root root 30 Jan 15 23:01 deflate.conf -> ../mods-available/deflate.conf
+2026-01-21T15:35:03.150922059Z [inf]  lrwxrwxrwx 1 root root 30 Jan 15 23:01 deflate.load -> ../mods-available/deflate.load
+2026-01-21T15:35:03.150930342Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:01 dir.conf -> ../mods-available/dir.conf
+2026-01-21T15:35:03.150937437Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:01 dir.load -> ../mods-available/dir.load
+2026-01-21T15:35:03.150945192Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:01 env.load -> ../mods-available/env.load
+2026-01-21T15:35:03.150953337Z [inf]  lrwxrwxrwx 1 root root 29 Jan 15 23:01 filter.load -> ../mods-available/filter.load
+2026-01-21T15:35:03.150961082Z [inf]  lrwxrwxrwx 1 root root 27 Jan 15 23:01 mime.conf -> ../mods-available/mime.conf
+2026-01-21T15:35:03.150969224Z [inf]  lrwxrwxrwx 1 root root 27 Jan 15 23:01 mime.load -> ../mods-available/mime.load
+2026-01-21T15:35:03.150977188Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 mpm_event.conf -> ../mods-available/mpm_event.conf
+2026-01-21T15:35:03.150984643Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 mpm_event.load -> ../mods-available/mpm_event.load
+2026-01-21T15:35:03.150991952Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 mpm_prefork.conf -> ../mods-available/mpm_prefork.conf
+2026-01-21T15:35:03.150998908Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 mpm_prefork.load -> ../mods-available/mpm_prefork.load
+2026-01-21T15:35:03.151005677Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 negotiation.conf -> ../mods-available/negotiation.conf
+2026-01-21T15:35:03.151013509Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 negotiation.load -> ../mods-available/negotiation.load
+2026-01-21T15:35:03.151020204Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:03 php.load -> ../mods-available/php.load
+2026-01-21T15:35:03.151033719Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 reqtimeout.conf -> ../mods-available/reqtimeout.conf
+2026-01-21T15:35:03.151040260Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 reqtimeout.load -> ../mods-available/reqtimeout.load
+2026-01-21T15:35:03.151047676Z [inf]  lrwxrwxrwx 1 root root 30 Jan 21 15:34 rewrite.load -> ../mods-available/rewrite.load
+2026-01-21T15:35:03.151055557Z [inf]  lrwxrwxrwx 1 root root 31 Jan 15 23:01 setenvif.conf -> ../mods-available/setenvif.conf
+2026-01-21T15:35:03.151062211Z [inf]  lrwxrwxrwx 1 root root 31 Jan 15 23:01 setenvif.load -> ../mods-available/setenvif.load
+2026-01-21T15:35:03.151069481Z [inf]  lrwxrwxrwx 1 root root 29 Jan 15 23:01 status.conf -> ../mods-available/status.conf
+2026-01-21T15:35:03.151094993Z [inf]  lrwxrwxrwx 1 root root 29 Jan 15 23:01 status.load -> ../mods-available/status.load
+2026-01-21T15:35:03.237939738Z [err]  AH00534: apache2: Configuration error: More than one MPM loaded.
+2026-01-21T15:35:05.229295235Z [inf]  Running migrations...
+2026-01-21T15:35:05.522025740Z [inf]
+2026-01-21T15:35:05.522030556Z [inf]     INFO  Nothing to migrate.
+2026-01-21T15:35:05.522034781Z [inf]
+2026-01-21T15:35:05.522039282Z [inf]  Caching configuration...
+2026-01-21T15:35:05.634802412Z [inf]
+2026-01-21T15:35:05.634808663Z [inf]     INFO  Configuration cached successfully.
+2026-01-21T15:35:05.634819296Z [inf]
+2026-01-21T15:35:05.775181836Z [inf]
+2026-01-21T15:35:05.775193258Z [inf]     INFO  Routes cached successfully.
+2026-01-21T15:35:05.775199277Z [inf]
+2026-01-21T15:35:05.919064864Z [inf]
+2026-01-21T15:35:05.920259049Z [inf]
+2026-01-21T15:35:05.920267582Z [inf]     INFO  Blade templates cached successfully.
+2026-01-21T15:35:05.920274593Z [inf]
+2026-01-21T15:35:05.934038755Z [inf]  Starting Apache...
+2026-01-21T15:35:05.934047915Z [inf]  lrwxrwxrwx 1 root root 30 Jan 15 23:01 deflate.conf -> ../mods-available/deflate.conf
+2026-01-21T15:35:05.934050105Z [inf]  Enabled Apache Modules:
+2026-01-21T15:35:05.934058486Z [inf]  total 0
+2026-01-21T15:35:05.934061252Z [inf]  lrwxrwxrwx 1 root root 30 Jan 15 23:01 deflate.load -> ../mods-available/deflate.load
+2026-01-21T15:35:05.934064769Z [inf]  lrwxrwxrwx 1 root root 36 Jan 15 23:01 access_compat.load -> ../mods-available/access_compat.load
+2026-01-21T15:35:05.934070132Z [inf]  lrwxrwxrwx 1 root root 28 Jan 15 23:01 alias.conf -> ../mods-available/alias.conf
+2026-01-21T15:35:05.934070945Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:01 dir.conf -> ../mods-available/dir.conf
+2026-01-21T15:35:05.934075488Z [inf]  lrwxrwxrwx 1 root root 28 Jan 15 23:01 alias.load -> ../mods-available/alias.load
+2026-01-21T15:35:05.934079625Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:01 dir.load -> ../mods-available/dir.load
+2026-01-21T15:35:05.934081827Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 auth_basic.load -> ../mods-available/auth_basic.load
+2026-01-21T15:35:05.934085717Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authn_core.load -> ../mods-available/authn_core.load
+2026-01-21T15:35:05.934089835Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authn_file.load -> ../mods-available/authn_file.load
+2026-01-21T15:35:05.934093823Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authz_core.load -> ../mods-available/authz_core.load
+2026-01-21T15:35:05.934097703Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authz_host.load -> ../mods-available/authz_host.load
+2026-01-21T15:35:05.934102106Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authz_user.load -> ../mods-available/authz_user.load
+2026-01-21T15:35:05.934105810Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 autoindex.conf -> ../mods-available/autoindex.conf
+2026-01-21T15:35:05.934109404Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 autoindex.load -> ../mods-available/autoindex.load
+2026-01-21T15:35:05.935255214Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:01 env.load -> ../mods-available/env.load
+2026-01-21T15:35:05.935264627Z [inf]  lrwxrwxrwx 1 root root 29 Jan 15 23:01 filter.load -> ../mods-available/filter.load
+2026-01-21T15:35:05.935271656Z [inf]  lrwxrwxrwx 1 root root 27 Jan 15 23:01 mime.conf -> ../mods-available/mime.conf
+2026-01-21T15:35:05.935276456Z [inf]  lrwxrwxrwx 1 root root 27 Jan 15 23:01 mime.load -> ../mods-available/mime.load
+2026-01-21T15:35:05.935281256Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 mpm_event.conf -> ../mods-available/mpm_event.conf
+2026-01-21T15:35:05.935285711Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 mpm_event.load -> ../mods-available/mpm_event.load
+2026-01-21T15:35:05.935289591Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 mpm_prefork.conf -> ../mods-available/mpm_prefork.conf
+2026-01-21T15:35:05.935294591Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 mpm_prefork.load -> ../mods-available/mpm_prefork.load
+2026-01-21T15:35:05.935300990Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 negotiation.conf -> ../mods-available/negotiation.conf
+2026-01-21T15:35:05.935307570Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 negotiation.load -> ../mods-available/negotiation.load
+2026-01-21T15:35:05.935313833Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:03 php.load -> ../mods-available/php.load
+2026-01-21T15:35:05.935320862Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 reqtimeout.conf -> ../mods-available/reqtimeout.conf
+2026-01-21T15:35:05.935330347Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 reqtimeout.load -> ../mods-available/reqtimeout.load
+2026-01-21T15:35:05.935336847Z [inf]  lrwxrwxrwx 1 root root 30 Jan 21 15:34 rewrite.load -> ../mods-available/rewrite.load
+2026-01-21T15:35:05.935344222Z [inf]  lrwxrwxrwx 1 root root 31 Jan 15 23:01 setenvif.conf -> ../mods-available/setenvif.conf
+2026-01-21T15:35:05.935351460Z [inf]  lrwxrwxrwx 1 root root 31 Jan 15 23:01 setenvif.load -> ../mods-available/setenvif.load
+2026-01-21T15:35:05.936444377Z [inf]  lrwxrwxrwx 1 root root 29 Jan 15 23:01 status.conf -> ../mods-available/status.conf
+2026-01-21T15:35:05.936452568Z [inf]  lrwxrwxrwx 1 root root 29 Jan 15 23:01 status.load -> ../mods-available/status.load
+2026-01-21T15:35:05.971488238Z [err]  AH00534: apache2: Configuration error: More than one MPM loaded.
+2026-01-21T15:35:06.688266404Z [inf]  Running migrations...
+2026-01-21T15:35:06.914894568Z [inf]
+2026-01-21T15:35:06.914898937Z [inf]     INFO  Nothing to migrate.
+2026-01-21T15:35:06.914903294Z [inf]
+2026-01-21T15:35:06.921708380Z [inf]  Caching configuration...
+2026-01-21T15:35:07.050924315Z [inf]
+2026-01-21T15:35:07.050932074Z [inf]     INFO  Configuration cached successfully.
+2026-01-21T15:35:07.050938505Z [inf]
+2026-01-21T15:35:07.240690655Z [inf]
+2026-01-21T15:35:07.240697581Z [inf]     INFO  Routes cached successfully.
+2026-01-21T15:35:07.240704041Z [inf]
+2026-01-21T15:35:07.364117301Z [inf]
+2026-01-21T15:35:07.364124203Z [inf]
+2026-01-21T15:35:07.364130869Z [inf]     INFO  Blade templates cached successfully.
+2026-01-21T15:35:07.364137268Z [inf]
+2026-01-21T15:35:07.387925639Z [inf]  Starting Apache...
+2026-01-21T15:35:07.387935555Z [inf]  Enabled Apache Modules:
+2026-01-21T15:35:07.436588812Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:01 dir.conf -> ../mods-available/dir.conf
+2026-01-21T15:35:07.436600724Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:01 dir.load -> ../mods-available/dir.load
+2026-01-21T15:35:07.436610244Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:01 env.load -> ../mods-available/env.load
+2026-01-21T15:35:07.436628032Z [inf]  total 0
+2026-01-21T15:35:07.436634924Z [inf]  lrwxrwxrwx 1 root root 36 Jan 15 23:01 access_compat.load -> ../mods-available/access_compat.load
+2026-01-21T15:35:07.436642198Z [inf]  lrwxrwxrwx 1 root root 28 Jan 15 23:01 alias.conf -> ../mods-available/alias.conf
+2026-01-21T15:35:07.436648762Z [inf]  lrwxrwxrwx 1 root root 28 Jan 15 23:01 alias.load -> ../mods-available/alias.load
+2026-01-21T15:35:07.436655336Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 auth_basic.load -> ../mods-available/auth_basic.load
+2026-01-21T15:35:07.436661287Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authn_core.load -> ../mods-available/authn_core.load
+2026-01-21T15:35:07.436667099Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authn_file.load -> ../mods-available/authn_file.load
+2026-01-21T15:35:07.436672767Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authz_core.load -> ../mods-available/authz_core.load
+2026-01-21T15:35:07.436679124Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authz_host.load -> ../mods-available/authz_host.load
+2026-01-21T15:35:07.436704919Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authz_user.load -> ../mods-available/authz_user.load
+2026-01-21T15:35:07.436711573Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 autoindex.conf -> ../mods-available/autoindex.conf
+2026-01-21T15:35:07.436722229Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 autoindex.load -> ../mods-available/autoindex.load
+2026-01-21T15:35:07.436728762Z [inf]  lrwxrwxrwx 1 root root 30 Jan 15 23:01 deflate.conf -> ../mods-available/deflate.conf
+2026-01-21T15:35:07.436736583Z [inf]  lrwxrwxrwx 1 root root 30 Jan 15 23:01 deflate.load -> ../mods-available/deflate.load
+2026-01-21T15:35:07.437987837Z [inf]  lrwxrwxrwx 1 root root 29 Jan 15 23:01 filter.load -> ../mods-available/filter.load
+2026-01-21T15:35:07.437998572Z [inf]  lrwxrwxrwx 1 root root 27 Jan 15 23:01 mime.conf -> ../mods-available/mime.conf
+2026-01-21T15:35:07.438006702Z [inf]  lrwxrwxrwx 1 root root 27 Jan 15 23:01 mime.load -> ../mods-available/mime.load
+2026-01-21T15:35:07.438014468Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 mpm_event.conf -> ../mods-available/mpm_event.conf
+2026-01-21T15:35:07.438021789Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 mpm_event.load -> ../mods-available/mpm_event.load
+2026-01-21T15:35:07.438029163Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 mpm_prefork.conf -> ../mods-available/mpm_prefork.conf
+2026-01-21T15:35:07.438035972Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 mpm_prefork.load -> ../mods-available/mpm_prefork.load
+2026-01-21T15:35:07.438044016Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 negotiation.conf -> ../mods-available/negotiation.conf
+2026-01-21T15:35:07.438050969Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 negotiation.load -> ../mods-available/negotiation.load
+2026-01-21T15:35:07.438058007Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:03 php.load -> ../mods-available/php.load
+2026-01-21T15:35:07.438064804Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 reqtimeout.conf -> ../mods-available/reqtimeout.conf
+2026-01-21T15:35:07.438071300Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 reqtimeout.load -> ../mods-available/reqtimeout.load
+2026-01-21T15:35:07.438083552Z [inf]  lrwxrwxrwx 1 root root 30 Jan 21 15:34 rewrite.load -> ../mods-available/rewrite.load
+2026-01-21T15:35:07.438090769Z [inf]  lrwxrwxrwx 1 root root 31 Jan 15 23:01 setenvif.conf -> ../mods-available/setenvif.conf
+2026-01-21T15:35:07.438098180Z [inf]  lrwxrwxrwx 1 root root 31 Jan 15 23:01 setenvif.load -> ../mods-available/setenvif.load
+2026-01-21T15:35:07.438105047Z [inf]  lrwxrwxrwx 1 root root 29 Jan 15 23:01 status.conf -> ../mods-available/status.conf
+2026-01-21T15:35:07.440081806Z [inf]  lrwxrwxrwx 1 root root 29 Jan 15 23:01 status.load -> ../mods-available/status.load
+2026-01-21T15:35:07.464485567Z [err]  AH00534: apache2: Configuration error: More than one MPM loaded.
+2026-01-21T15:35:08.232834658Z [inf]  Running migrations...
+2026-01-21T15:35:08.584850971Z [inf]
+2026-01-21T15:35:08.584859655Z [inf]     INFO  Nothing to migrate.
+2026-01-21T15:35:08.584865528Z [inf]
+2026-01-21T15:35:08.590396707Z [inf]  Caching configuration...
+2026-01-21T15:35:08.721453134Z [inf]
+2026-01-21T15:35:08.721461282Z [inf]     INFO  Configuration cached successfully.
+2026-01-21T15:35:08.721470136Z [inf]
+2026-01-21T15:35:08.870155698Z [inf]
+2026-01-21T15:35:08.870167552Z [inf]     INFO  Routes cached successfully.
+2026-01-21T15:35:08.870176818Z [inf]
+2026-01-21T15:35:09.023892847Z [inf]
+2026-01-21T15:35:09.023899592Z [inf]
+2026-01-21T15:35:09.023906604Z [inf]     INFO  Blade templates cached successfully.
+2026-01-21T15:35:09.023914103Z [inf]
+2026-01-21T15:35:09.031013750Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 autoindex.load -> ../mods-available/autoindex.load
+2026-01-21T15:35:09.031025719Z [inf]  lrwxrwxrwx 1 root root 30 Jan 15 23:01 deflate.conf -> ../mods-available/deflate.conf
+2026-01-21T15:35:09.031033870Z [inf]  lrwxrwxrwx 1 root root 30 Jan 15 23:01 deflate.load -> ../mods-available/deflate.load
+2026-01-21T15:35:09.031043589Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:01 dir.conf -> ../mods-available/dir.conf
+2026-01-21T15:35:09.031044738Z [inf]  Starting Apache...
+2026-01-21T15:35:09.031053063Z [inf]  Enabled Apache Modules:
+2026-01-21T15:35:09.031055109Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:01 dir.load -> ../mods-available/dir.load
+2026-01-21T15:35:09.031060991Z [inf]  total 0
+2026-01-21T15:35:09.031069313Z [inf]  lrwxrwxrwx 1 root root 36 Jan 15 23:01 access_compat.load -> ../mods-available/access_compat.load
+2026-01-21T15:35:09.031075789Z [inf]  lrwxrwxrwx 1 root root 28 Jan 15 23:01 alias.conf -> ../mods-available/alias.conf
+2026-01-21T15:35:09.031082210Z [inf]  lrwxrwxrwx 1 root root 28 Jan 15 23:01 alias.load -> ../mods-available/alias.load
+2026-01-21T15:35:09.031088198Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 auth_basic.load -> ../mods-available/auth_basic.load
+2026-01-21T15:35:09.031094089Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authn_core.load -> ../mods-available/authn_core.load
+2026-01-21T15:35:09.031101607Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authn_file.load -> ../mods-available/authn_file.load
+2026-01-21T15:35:09.031107476Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authz_core.load -> ../mods-available/authz_core.load
+2026-01-21T15:35:09.031113727Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authz_host.load -> ../mods-available/authz_host.load
+2026-01-21T15:35:09.031120250Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authz_user.load -> ../mods-available/authz_user.load
+2026-01-21T15:35:09.031126943Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 autoindex.conf -> ../mods-available/autoindex.conf
+2026-01-21T15:35:09.032634428Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:01 env.load -> ../mods-available/env.load
+2026-01-21T15:35:09.032641386Z [inf]  lrwxrwxrwx 1 root root 29 Jan 15 23:01 filter.load -> ../mods-available/filter.load
+2026-01-21T15:35:09.032647238Z [inf]  lrwxrwxrwx 1 root root 27 Jan 15 23:01 mime.conf -> ../mods-available/mime.conf
+2026-01-21T15:35:09.032653414Z [inf]  lrwxrwxrwx 1 root root 27 Jan 15 23:01 mime.load -> ../mods-available/mime.load
+2026-01-21T15:35:09.032659102Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 mpm_event.conf -> ../mods-available/mpm_event.conf
+2026-01-21T15:35:09.032664417Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 mpm_event.load -> ../mods-available/mpm_event.load
+2026-01-21T15:35:09.032670109Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 mpm_prefork.conf -> ../mods-available/mpm_prefork.conf
+2026-01-21T15:35:09.032675550Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 mpm_prefork.load -> ../mods-available/mpm_prefork.load
+2026-01-21T15:35:09.032682357Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 negotiation.conf -> ../mods-available/negotiation.conf
+2026-01-21T15:35:09.032688715Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 negotiation.load -> ../mods-available/negotiation.load
+2026-01-21T15:35:09.032695283Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:03 php.load -> ../mods-available/php.load
+2026-01-21T15:35:09.032701103Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 reqtimeout.conf -> ../mods-available/reqtimeout.conf
+2026-01-21T15:35:09.032707752Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 reqtimeout.load -> ../mods-available/reqtimeout.load
+2026-01-21T15:35:09.032713363Z [inf]  lrwxrwxrwx 1 root root 30 Jan 21 15:34 rewrite.load -> ../mods-available/rewrite.load
+2026-01-21T15:35:09.032719711Z [inf]  lrwxrwxrwx 1 root root 31 Jan 15 23:01 setenvif.conf -> ../mods-available/setenvif.conf
+2026-01-21T15:35:09.032727208Z [inf]  lrwxrwxrwx 1 root root 31 Jan 15 23:01 setenvif.load -> ../mods-available/setenvif.load
+2026-01-21T15:35:09.033595227Z [inf]  lrwxrwxrwx 1 root root 29 Jan 15 23:01 status.conf -> ../mods-available/status.conf
+2026-01-21T15:35:09.033602949Z [inf]  lrwxrwxrwx 1 root root 29 Jan 15 23:01 status.load -> ../mods-available/status.load
+2026-01-21T15:35:09.067592612Z [err]  AH00534: apache2: Configuration error: More than one MPM loaded.
+2026-01-21T15:35:09.581805709Z [inf]  Running migrations...
+2026-01-21T15:35:09.813116892Z [inf]
+2026-01-21T15:35:09.813126037Z [inf]     INFO  Nothing to migrate.
+2026-01-21T15:35:09.813131556Z [inf]
+2026-01-21T15:35:09.820095512Z [inf]  Caching configuration...
+2026-01-21T15:35:09.957603147Z [inf]
+2026-01-21T15:35:09.957610782Z [inf]     INFO  Configuration cached successfully.
+2026-01-21T15:35:09.957615547Z [inf]
+2026-01-21T15:35:10.091876975Z [inf]
+2026-01-21T15:35:10.091881020Z [inf]     INFO  Routes cached successfully.
+2026-01-21T15:35:10.091884792Z [inf]
+2026-01-21T15:35:10.246122842Z [inf]
+2026-01-21T15:35:10.246130084Z [inf]
+2026-01-21T15:35:10.246137545Z [inf]     INFO  Blade templates cached successfully.
+2026-01-21T15:35:10.246145351Z [inf]
+2026-01-21T15:35:10.259898096Z [inf]  lrwxrwxrwx 1 root root 30 Jan 15 23:01 deflate.conf -> ../mods-available/deflate.conf
+2026-01-21T15:35:10.259906485Z [inf]  Starting Apache...
+2026-01-21T15:35:10.259906704Z [inf]  lrwxrwxrwx 1 root root 30 Jan 15 23:01 deflate.load -> ../mods-available/deflate.load
+2026-01-21T15:35:10.259913771Z [inf]  Enabled Apache Modules:
+2026-01-21T15:35:10.259914543Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:01 dir.conf -> ../mods-available/dir.conf
+2026-01-21T15:35:10.259920932Z [inf]  total 0
+2026-01-21T15:35:10.259921682Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:01 dir.load -> ../mods-available/dir.load
+2026-01-21T15:35:10.259926971Z [inf]  lrwxrwxrwx 1 root root 36 Jan 15 23:01 access_compat.load -> ../mods-available/access_compat.load
+2026-01-21T15:35:10.259933767Z [inf]  lrwxrwxrwx 1 root root 28 Jan 15 23:01 alias.conf -> ../mods-available/alias.conf
+2026-01-21T15:35:10.259940136Z [inf]  lrwxrwxrwx 1 root root 28 Jan 15 23:01 alias.load -> ../mods-available/alias.load
+2026-01-21T15:35:10.259946719Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 auth_basic.load -> ../mods-available/auth_basic.load
+2026-01-21T15:35:10.259962791Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authn_core.load -> ../mods-available/authn_core.load
+2026-01-21T15:35:10.259967584Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authn_file.load -> ../mods-available/authn_file.load
+2026-01-21T15:35:10.259971743Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authz_core.load -> ../mods-available/authz_core.load
+2026-01-21T15:35:10.259975350Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authz_host.load -> ../mods-available/authz_host.load
+2026-01-21T15:35:10.259979450Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authz_user.load -> ../mods-available/authz_user.load
+2026-01-21T15:35:10.259983148Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 autoindex.conf -> ../mods-available/autoindex.conf
+2026-01-21T15:35:10.259986891Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 autoindex.load -> ../mods-available/autoindex.load
+2026-01-21T15:35:10.261260314Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:01 env.load -> ../mods-available/env.load
+2026-01-21T15:35:10.261268098Z [inf]  lrwxrwxrwx 1 root root 29 Jan 15 23:01 filter.load -> ../mods-available/filter.load
+2026-01-21T15:35:10.261269176Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:03 php.load -> ../mods-available/php.load
+2026-01-21T15:35:10.261275828Z [inf]  lrwxrwxrwx 1 root root 27 Jan 15 23:01 mime.conf -> ../mods-available/mime.conf
+2026-01-21T15:35:10.261283575Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 reqtimeout.conf -> ../mods-available/reqtimeout.conf
+2026-01-21T15:35:10.261283668Z [inf]  lrwxrwxrwx 1 root root 27 Jan 15 23:01 mime.load -> ../mods-available/mime.load
+2026-01-21T15:35:10.261288934Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 mpm_event.conf -> ../mods-available/mpm_event.conf
+2026-01-21T15:35:10.261294586Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 reqtimeout.load -> ../mods-available/reqtimeout.load
+2026-01-21T15:35:10.261294588Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 mpm_event.load -> ../mods-available/mpm_event.load
+2026-01-21T15:35:10.261300433Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 mpm_prefork.conf -> ../mods-available/mpm_prefork.conf
+2026-01-21T15:35:10.261304155Z [inf]  lrwxrwxrwx 1 root root 30 Jan 21 15:34 rewrite.load -> ../mods-available/rewrite.load
+2026-01-21T15:35:10.261306153Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 mpm_prefork.load -> ../mods-available/mpm_prefork.load
+2026-01-21T15:35:10.261311111Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 negotiation.conf -> ../mods-available/negotiation.conf
+2026-01-21T15:35:10.261315097Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 negotiation.load -> ../mods-available/negotiation.load
+2026-01-21T15:35:10.261326488Z [inf]  lrwxrwxrwx 1 root root 31 Jan 15 23:01 setenvif.conf -> ../mods-available/setenvif.conf
+2026-01-21T15:35:10.261335056Z [inf]  lrwxrwxrwx 1 root root 31 Jan 15 23:01 setenvif.load -> ../mods-available/setenvif.load
+2026-01-21T15:35:10.262603355Z [inf]  lrwxrwxrwx 1 root root 29 Jan 15 23:01 status.conf -> ../mods-available/status.conf
+2026-01-21T15:35:10.262610658Z [inf]  lrwxrwxrwx 1 root root 29 Jan 15 23:01 status.load -> ../mods-available/status.load
+2026-01-21T15:35:10.288280046Z [err]  AH00534: apache2: Configuration error: More than one MPM loaded.
+2026-01-21T15:35:10.805162868Z [inf]  Running migrations...
+2026-01-21T15:35:11.237253513Z [inf]
+2026-01-21T15:35:11.237260270Z [inf]     INFO  Nothing to migrate.
+2026-01-21T15:35:11.237266617Z [inf]
+2026-01-21T15:35:11.237273387Z [inf]  Caching configuration...
+2026-01-21T15:35:11.310662856Z [inf]
+2026-01-21T15:35:11.310673241Z [inf]     INFO  Configuration cached successfully.
+2026-01-21T15:35:11.310681701Z [inf]
+2026-01-21T15:35:11.460767280Z [inf]
+2026-01-21T15:35:11.460774734Z [inf]     INFO  Routes cached successfully.
+2026-01-21T15:35:11.460783332Z [inf]
+2026-01-21T15:35:11.625073112Z [inf]
+2026-01-21T15:35:11.625082815Z [inf]
+2026-01-21T15:35:11.625091597Z [inf]     INFO  Blade templates cached successfully.
+2026-01-21T15:35:11.625100529Z [inf]
+2026-01-21T15:35:11.632558654Z [inf]  Starting Apache...
+2026-01-21T15:35:11.632566732Z [inf]  Enabled Apache Modules:
+2026-01-21T15:35:11.632574352Z [inf]  total 0
+2026-01-21T15:35:11.632581095Z [inf]  lrwxrwxrwx 1 root root 36 Jan 15 23:01 access_compat.load -> ../mods-available/access_compat.load
+2026-01-21T15:35:11.632589233Z [inf]  lrwxrwxrwx 1 root root 28 Jan 15 23:01 alias.conf -> ../mods-available/alias.conf
+2026-01-21T15:35:11.632596890Z [inf]  lrwxrwxrwx 1 root root 28 Jan 15 23:01 alias.load -> ../mods-available/alias.load
+2026-01-21T15:35:11.632604268Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 auth_basic.load -> ../mods-available/auth_basic.load
+2026-01-21T15:35:11.632608985Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authn_core.load -> ../mods-available/authn_core.load
+2026-01-21T15:35:11.632613013Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authn_file.load -> ../mods-available/authn_file.load
+2026-01-21T15:35:11.632617768Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authz_core.load -> ../mods-available/authz_core.load
+2026-01-21T15:35:11.632621850Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authz_host.load -> ../mods-available/authz_host.load
+2026-01-21T15:35:11.632627405Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authz_user.load -> ../mods-available/authz_user.load
+2026-01-21T15:35:11.632631977Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 autoindex.conf -> ../mods-available/autoindex.conf
+2026-01-21T15:35:11.632636047Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 autoindex.load -> ../mods-available/autoindex.load
+2026-01-21T15:35:11.632641907Z [inf]  lrwxrwxrwx 1 root root 30 Jan 15 23:01 deflate.conf -> ../mods-available/deflate.conf
+2026-01-21T15:35:11.632646081Z [inf]  lrwxrwxrwx 1 root root 30 Jan 15 23:01 deflate.load -> ../mods-available/deflate.load
+2026-01-21T15:35:11.632650564Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:01 dir.conf -> ../mods-available/dir.conf
+2026-01-21T15:35:11.632656103Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:01 dir.load -> ../mods-available/dir.load
+2026-01-21T15:35:11.634353242Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:01 env.load -> ../mods-available/env.load
+2026-01-21T15:35:11.634362920Z [inf]  lrwxrwxrwx 1 root root 29 Jan 15 23:01 filter.load -> ../mods-available/filter.load
+2026-01-21T15:35:11.634371703Z [inf]  lrwxrwxrwx 1 root root 27 Jan 15 23:01 mime.conf -> ../mods-available/mime.conf
+2026-01-21T15:35:11.634379282Z [inf]  lrwxrwxrwx 1 root root 27 Jan 15 23:01 mime.load -> ../mods-available/mime.load
+2026-01-21T15:35:11.634386451Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 mpm_event.conf -> ../mods-available/mpm_event.conf
+2026-01-21T15:35:11.634393768Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 mpm_event.load -> ../mods-available/mpm_event.load
+2026-01-21T15:35:11.634400236Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 mpm_prefork.conf -> ../mods-available/mpm_prefork.conf
+2026-01-21T15:35:11.634408420Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 mpm_prefork.load -> ../mods-available/mpm_prefork.load
+2026-01-21T15:35:11.634414268Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 negotiation.conf -> ../mods-available/negotiation.conf
+2026-01-21T15:35:11.634418672Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 negotiation.load -> ../mods-available/negotiation.load
+2026-01-21T15:35:11.634422575Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:03 php.load -> ../mods-available/php.load
+2026-01-21T15:35:11.634426289Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 reqtimeout.conf -> ../mods-available/reqtimeout.conf
+2026-01-21T15:35:11.634430039Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 reqtimeout.load -> ../mods-available/reqtimeout.load
+2026-01-21T15:35:11.634433935Z [inf]  lrwxrwxrwx 1 root root 30 Jan 21 15:34 rewrite.load -> ../mods-available/rewrite.load
+2026-01-21T15:35:11.634438392Z [inf]  lrwxrwxrwx 1 root root 31 Jan 15 23:01 setenvif.conf -> ../mods-available/setenvif.conf
+2026-01-21T15:35:11.634443130Z [inf]  lrwxrwxrwx 1 root root 31 Jan 15 23:01 setenvif.load -> ../mods-available/setenvif.load
+2026-01-21T15:35:11.635258503Z [inf]  lrwxrwxrwx 1 root root 29 Jan 15 23:01 status.conf -> ../mods-available/status.conf
+2026-01-21T15:35:11.635266286Z [inf]  lrwxrwxrwx 1 root root 29 Jan 15 23:01 status.load -> ../mods-available/status.load
+2026-01-21T15:35:11.672218955Z [err]  AH00534: apache2: Configuration error: More than one MPM loaded.
+2026-01-21T15:35:12.100250669Z [inf]  Running migrations...
+2026-01-21T15:35:12.311653372Z [inf]
+2026-01-21T15:35:12.311663668Z [inf]     INFO  Nothing to migrate.
+2026-01-21T15:35:12.311671503Z [inf]
+2026-01-21T15:35:12.319039147Z [inf]  Caching configuration...
+2026-01-21T15:35:12.449903440Z [inf]
+2026-01-21T15:35:12.449912579Z [inf]     INFO  Configuration cached successfully.
+2026-01-21T15:35:12.449919632Z [inf]
+2026-01-21T15:35:12.739306419Z [inf]
+2026-01-21T15:35:12.739310549Z [inf]     INFO  Routes cached successfully.
+2026-01-21T15:35:12.739314681Z [inf]
+2026-01-21T15:35:13.122726024Z [inf]
+2026-01-21T15:35:13.122731385Z [inf]
+2026-01-21T15:35:13.122736739Z [inf]     INFO  Blade templates cached successfully.
+2026-01-21T15:35:13.122741464Z [inf]
+2026-01-21T15:35:13.122745555Z [inf]  Starting Apache...
+2026-01-21T15:35:13.122749783Z [inf]  Enabled Apache Modules:
+2026-01-21T15:35:13.122810765Z [inf]  total 0
+2026-01-21T15:35:13.122814652Z [inf]  lrwxrwxrwx 1 root root 36 Jan 15 23:01 access_compat.load -> ../mods-available/access_compat.load
+2026-01-21T15:35:13.122818874Z [inf]  lrwxrwxrwx 1 root root 28 Jan 15 23:01 alias.conf -> ../mods-available/alias.conf
+2026-01-21T15:35:13.122822729Z [inf]  lrwxrwxrwx 1 root root 28 Jan 15 23:01 alias.load -> ../mods-available/alias.load
+2026-01-21T15:35:13.122829617Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 auth_basic.load -> ../mods-available/auth_basic.load
+2026-01-21T15:35:13.122833381Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authn_core.load -> ../mods-available/authn_core.load
+2026-01-21T15:35:13.122838918Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authn_file.load -> ../mods-available/authn_file.load
+2026-01-21T15:35:13.122842775Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authz_core.load -> ../mods-available/authz_core.load
+2026-01-21T15:35:13.122846750Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authz_host.load -> ../mods-available/authz_host.load
+2026-01-21T15:35:13.122851035Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authz_user.load -> ../mods-available/authz_user.load
+2026-01-21T15:35:13.122855067Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 autoindex.conf -> ../mods-available/autoindex.conf
+2026-01-21T15:35:13.122858827Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 autoindex.load -> ../mods-available/autoindex.load
+2026-01-21T15:35:13.122863214Z [inf]  lrwxrwxrwx 1 root root 30 Jan 15 23:01 deflate.conf -> ../mods-available/deflate.conf
+2026-01-21T15:35:13.122868038Z [inf]  lrwxrwxrwx 1 root root 30 Jan 15 23:01 deflate.load -> ../mods-available/deflate.load
+2026-01-21T15:35:13.122872334Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:01 dir.conf -> ../mods-available/dir.conf
+2026-01-21T15:35:13.122876214Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:01 dir.load -> ../mods-available/dir.load
+2026-01-21T15:35:13.122879836Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:01 env.load -> ../mods-available/env.load
+2026-01-21T15:35:13.129064882Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 negotiation.load -> ../mods-available/negotiation.load
+2026-01-21T15:35:13.129075785Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:03 php.load -> ../mods-available/php.load
+2026-01-21T15:35:13.129087319Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 reqtimeout.conf -> ../mods-available/reqtimeout.conf
+2026-01-21T15:35:13.129088621Z [inf]  lrwxrwxrwx 1 root root 29 Jan 15 23:01 filter.load -> ../mods-available/filter.load
+2026-01-21T15:35:13.129097391Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 reqtimeout.load -> ../mods-available/reqtimeout.load
+2026-01-21T15:35:13.129097431Z [inf]  lrwxrwxrwx 1 root root 27 Jan 15 23:01 mime.conf -> ../mods-available/mime.conf
+2026-01-21T15:35:13.129106037Z [inf]  lrwxrwxrwx 1 root root 30 Jan 21 15:34 rewrite.load -> ../mods-available/rewrite.load
+2026-01-21T15:35:13.129108853Z [inf]  lrwxrwxrwx 1 root root 27 Jan 15 23:01 mime.load -> ../mods-available/mime.load
+2026-01-21T15:35:13.129115180Z [inf]  lrwxrwxrwx 1 root root 31 Jan 15 23:01 setenvif.conf -> ../mods-available/setenvif.conf
+2026-01-21T15:35:13.129118135Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 mpm_event.conf -> ../mods-available/mpm_event.conf
+2026-01-21T15:35:13.129123415Z [inf]  lrwxrwxrwx 1 root root 31 Jan 15 23:01 setenvif.load -> ../mods-available/setenvif.load
+2026-01-21T15:35:13.129126976Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 mpm_event.load -> ../mods-available/mpm_event.load
+2026-01-21T15:35:13.129135779Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 mpm_prefork.conf -> ../mods-available/mpm_prefork.conf
+2026-01-21T15:35:13.129136512Z [inf]  lrwxrwxrwx 1 root root 29 Jan 15 23:01 status.conf -> ../mods-available/status.conf
+2026-01-21T15:35:13.129144209Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 mpm_prefork.load -> ../mods-available/mpm_prefork.load
+2026-01-21T15:35:13.129151352Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 negotiation.conf -> ../mods-available/negotiation.conf
+2026-01-21T15:35:13.198551300Z [inf]  lrwxrwxrwx 1 root root 29 Jan 15 23:01 status.load -> ../mods-available/status.load
+2026-01-21T15:35:13.198557003Z [err]  AH00534: apache2: Configuration error: More than one MPM loaded.
+2026-01-21T15:35:14.071109734Z [inf]  Running migrations...
+2026-01-21T15:35:14.414280072Z [inf]
+2026-01-21T15:35:14.414286055Z [inf]     INFO  Nothing to migrate.
+2026-01-21T15:35:14.414290629Z [inf]
+2026-01-21T15:35:14.420377235Z [inf]  Caching configuration...
+2026-01-21T15:35:14.551057638Z [inf]
+2026-01-21T15:35:14.551066605Z [inf]     INFO  Configuration cached successfully.
+2026-01-21T15:35:14.551074048Z [inf]
+2026-01-21T15:35:14.690812978Z [inf]
+2026-01-21T15:35:14.690819286Z [inf]     INFO  Routes cached successfully.
+2026-01-21T15:35:14.690823681Z [inf]
+2026-01-21T15:35:14.834698389Z [inf]     INFO  Blade templates cached successfully.
+2026-01-21T15:35:14.834708888Z [inf]
+2026-01-21T15:35:14.834793666Z [inf]
+2026-01-21T15:35:14.834855213Z [inf]
+2026-01-21T15:35:14.840784699Z [inf]  Starting Apache...
+2026-01-21T15:35:14.840795764Z [inf]  Enabled Apache Modules:
+2026-01-21T15:35:14.840806651Z [inf]  total 0
+2026-01-21T15:35:14.840814352Z [inf]  lrwxrwxrwx 1 root root 36 Jan 15 23:01 access_compat.load -> ../mods-available/access_compat.load
+2026-01-21T15:35:14.840821835Z [inf]  lrwxrwxrwx 1 root root 28 Jan 15 23:01 alias.conf -> ../mods-available/alias.conf
+2026-01-21T15:35:14.840829971Z [inf]  lrwxrwxrwx 1 root root 28 Jan 15 23:01 alias.load -> ../mods-available/alias.load
+2026-01-21T15:35:14.840842372Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 auth_basic.load -> ../mods-available/auth_basic.load
+2026-01-21T15:35:14.840850546Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authn_core.load -> ../mods-available/authn_core.load
+2026-01-21T15:35:14.840857242Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authn_file.load -> ../mods-available/authn_file.load
+2026-01-21T15:35:14.840865220Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authz_core.load -> ../mods-available/authz_core.load
+2026-01-21T15:35:14.840872637Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authz_host.load -> ../mods-available/authz_host.load
+2026-01-21T15:35:14.840880104Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authz_user.load -> ../mods-available/authz_user.load
+2026-01-21T15:35:14.840888451Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 autoindex.conf -> ../mods-available/autoindex.conf
+2026-01-21T15:35:14.840897583Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 autoindex.load -> ../mods-available/autoindex.load
+2026-01-21T15:35:14.840904732Z [inf]  lrwxrwxrwx 1 root root 30 Jan 15 23:01 deflate.conf -> ../mods-available/deflate.conf
+2026-01-21T15:35:14.840912366Z [inf]  lrwxrwxrwx 1 root root 30 Jan 15 23:01 deflate.load -> ../mods-available/deflate.load
+2026-01-21T15:35:14.840919137Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:01 dir.conf -> ../mods-available/dir.conf
+2026-01-21T15:35:14.840927417Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:01 dir.load -> ../mods-available/dir.load
+2026-01-21T15:35:14.842008555Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:01 env.load -> ../mods-available/env.load
+2026-01-21T15:35:14.842018558Z [inf]  lrwxrwxrwx 1 root root 29 Jan 15 23:01 filter.load -> ../mods-available/filter.load
+2026-01-21T15:35:14.842026063Z [inf]  lrwxrwxrwx 1 root root 27 Jan 15 23:01 mime.conf -> ../mods-available/mime.conf
+2026-01-21T15:35:14.842033240Z [inf]  lrwxrwxrwx 1 root root 27 Jan 15 23:01 mime.load -> ../mods-available/mime.load
+2026-01-21T15:35:14.842040385Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 mpm_event.conf -> ../mods-available/mpm_event.conf
+2026-01-21T15:35:14.842047837Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 mpm_event.load -> ../mods-available/mpm_event.load
+2026-01-21T15:35:14.842054960Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 mpm_prefork.conf -> ../mods-available/mpm_prefork.conf
+2026-01-21T15:35:14.842062154Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 mpm_prefork.load -> ../mods-available/mpm_prefork.load
+2026-01-21T15:35:14.842068753Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 negotiation.conf -> ../mods-available/negotiation.conf
+2026-01-21T15:35:14.842075669Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 negotiation.load -> ../mods-available/negotiation.load
+2026-01-21T15:35:14.842082252Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:03 php.load -> ../mods-available/php.load
+2026-01-21T15:35:14.842089010Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 reqtimeout.conf -> ../mods-available/reqtimeout.conf
+2026-01-21T15:35:14.842095769Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 reqtimeout.load -> ../mods-available/reqtimeout.load
+2026-01-21T15:35:14.842103529Z [inf]  lrwxrwxrwx 1 root root 30 Jan 21 15:34 rewrite.load -> ../mods-available/rewrite.load
+2026-01-21T15:35:14.842110407Z [inf]  lrwxrwxrwx 1 root root 31 Jan 15 23:01 setenvif.conf -> ../mods-available/setenvif.conf
+2026-01-21T15:35:14.842117203Z [inf]  lrwxrwxrwx 1 root root 31 Jan 15 23:01 setenvif.load -> ../mods-available/setenvif.load
+2026-01-21T15:35:14.842309313Z [inf]  lrwxrwxrwx 1 root root 29 Jan 15 23:01 status.conf -> ../mods-available/status.conf
+2026-01-21T15:35:14.842317736Z [inf]  lrwxrwxrwx 1 root root 29 Jan 15 23:01 status.load -> ../mods-available/status.load
+2026-01-21T15:35:14.870299080Z [err]  AH00534: apache2: Configuration error: More than one MPM loaded.
+2026-01-21T15:35:15.756445188Z [inf]  Running migrations...
+2026-01-21T15:35:15.952323288Z [inf]
+2026-01-21T15:35:15.952330929Z [inf]     INFO  Nothing to migrate.
+2026-01-21T15:35:15.952342793Z [inf]
+2026-01-21T15:35:15.958931639Z [inf]  Caching configuration...
+2026-01-21T15:35:16.084169585Z [inf]
+2026-01-21T15:35:16.084176226Z [inf]     INFO  Configuration cached successfully.
+2026-01-21T15:35:16.084180687Z [inf]
+2026-01-21T15:35:16.270804990Z [inf]
+2026-01-21T15:35:16.270808593Z [inf]     INFO  Routes cached successfully.
+2026-01-21T15:35:16.270812363Z [inf]
+2026-01-21T15:35:16.358986125Z [inf]
+2026-01-21T15:35:16.358992853Z [inf]
+2026-01-21T15:35:16.358997170Z [inf]     INFO  Blade templates cached successfully.
+2026-01-21T15:35:16.359001255Z [inf]
+2026-01-21T15:35:16.359504500Z [inf]  Starting Apache...
+2026-01-21T15:35:16.359510678Z [inf]  Enabled Apache Modules:
+2026-01-21T15:35:16.364931393Z [inf]  lrwxrwxrwx 1 root root 30 Jan 15 23:01 deflate.load -> ../mods-available/deflate.load
+2026-01-21T15:35:16.364937764Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:01 dir.conf -> ../mods-available/dir.conf
+2026-01-21T15:35:16.364953750Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:01 dir.load -> ../mods-available/dir.load
+2026-01-21T15:35:16.364958828Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:01 env.load -> ../mods-available/env.load
+2026-01-21T15:35:16.364969582Z [inf]  total 0
+2026-01-21T15:35:16.364980573Z [inf]  lrwxrwxrwx 1 root root 36 Jan 15 23:01 access_compat.load -> ../mods-available/access_compat.load
+2026-01-21T15:35:16.364995935Z [inf]  lrwxrwxrwx 1 root root 28 Jan 15 23:01 alias.conf -> ../mods-available/alias.conf
+2026-01-21T15:35:16.365005538Z [inf]  lrwxrwxrwx 1 root root 28 Jan 15 23:01 alias.load -> ../mods-available/alias.load
+2026-01-21T15:35:16.365013368Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 auth_basic.load -> ../mods-available/auth_basic.load
+2026-01-21T15:35:16.365020375Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authn_core.load -> ../mods-available/authn_core.load
+2026-01-21T15:35:16.365027512Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authn_file.load -> ../mods-available/authn_file.load
+2026-01-21T15:35:16.365034417Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authz_core.load -> ../mods-available/authz_core.load
+2026-01-21T15:35:16.365040885Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authz_host.load -> ../mods-available/authz_host.load
+2026-01-21T15:35:16.365047437Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authz_user.load -> ../mods-available/authz_user.load
+2026-01-21T15:35:16.365055149Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 autoindex.conf -> ../mods-available/autoindex.conf
+2026-01-21T15:35:16.365064210Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 autoindex.load -> ../mods-available/autoindex.load
+2026-01-21T15:35:16.365071580Z [inf]  lrwxrwxrwx 1 root root 30 Jan 15 23:01 deflate.conf -> ../mods-available/deflate.conf
+2026-01-21T15:35:16.366223293Z [inf]  lrwxrwxrwx 1 root root 29 Jan 15 23:01 filter.load -> ../mods-available/filter.load
+2026-01-21T15:35:16.366231510Z [inf]  lrwxrwxrwx 1 root root 27 Jan 15 23:01 mime.conf -> ../mods-available/mime.conf
+2026-01-21T15:35:16.366236711Z [inf]  lrwxrwxrwx 1 root root 27 Jan 15 23:01 mime.load -> ../mods-available/mime.load
+2026-01-21T15:35:16.366244060Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 mpm_event.conf -> ../mods-available/mpm_event.conf
+2026-01-21T15:35:16.366246338Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 mpm_prefork.conf -> ../mods-available/mpm_prefork.conf
+2026-01-21T15:35:16.366247208Z [inf]  lrwxrwxrwx 1 root root 31 Jan 15 23:01 setenvif.load -> ../mods-available/setenvif.load
+2026-01-21T15:35:16.366253320Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 mpm_event.load -> ../mods-available/mpm_event.load
+2026-01-21T15:35:16.366260726Z [inf]  lrwxrwxrwx 1 root root 29 Jan 15 23:01 status.conf -> ../mods-available/status.conf
+2026-01-21T15:35:16.366262287Z [inf]  lrwxrwxrwx 1 root root 30 Jan 21 15:34 rewrite.load -> ../mods-available/rewrite.load
+2026-01-21T15:35:16.366263781Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 reqtimeout.conf -> ../mods-available/reqtimeout.conf
+2026-01-21T15:35:16.366270166Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 mpm_prefork.load -> ../mods-available/mpm_prefork.load
+2026-01-21T15:35:16.366272151Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 negotiation.load -> ../mods-available/negotiation.load
+2026-01-21T15:35:16.366274879Z [inf]  lrwxrwxrwx 1 root root 31 Jan 15 23:01 setenvif.conf -> ../mods-available/setenvif.conf
+2026-01-21T15:35:16.366278639Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 reqtimeout.load -> ../mods-available/reqtimeout.load
+2026-01-21T15:35:16.366281951Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:03 php.load -> ../mods-available/php.load
+2026-01-21T15:35:16.366283468Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 negotiation.conf -> ../mods-available/negotiation.conf
+2026-01-21T15:35:16.366613915Z [inf]  lrwxrwxrwx 1 root root 29 Jan 15 23:01 status.load -> ../mods-available/status.load
+2026-01-21T15:35:16.399496657Z [err]  AH00534: apache2: Configuration error: More than one MPM loaded.
+2026-01-21T15:35:16.850777000Z [inf]  Running migrations...
+2026-01-21T15:35:17.275071811Z [inf]
+2026-01-21T15:35:17.275083703Z [inf]     INFO  Nothing to migrate.
+2026-01-21T15:35:17.275093071Z [inf]
+2026-01-21T15:35:17.275101159Z [inf]  Caching configuration...
+2026-01-21T15:35:17.327159169Z [inf]
+2026-01-21T15:35:17.327166904Z [inf]     INFO  Configuration cached successfully.
+2026-01-21T15:35:17.327173735Z [inf]
+2026-01-21T15:35:17.468472258Z [inf]
+2026-01-21T15:35:17.468479761Z [inf]     INFO  Routes cached successfully.
+2026-01-21T15:35:17.468485074Z [inf]
+2026-01-21T15:35:17.646981898Z [inf]
+2026-01-21T15:35:17.646986668Z [inf]
+2026-01-21T15:35:17.646990739Z [inf]     INFO  Blade templates cached successfully.
+2026-01-21T15:35:17.646994489Z [inf]
+2026-01-21T15:35:17.654847866Z [inf]  Starting Apache...
+2026-01-21T15:35:17.654853604Z [inf]  Enabled Apache Modules:
+2026-01-21T15:35:17.656298533Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:01 dir.conf -> ../mods-available/dir.conf
+2026-01-21T15:35:17.656311285Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:01 dir.load -> ../mods-available/dir.load
+2026-01-21T15:35:17.656320477Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:01 env.load -> ../mods-available/env.load
+2026-01-21T15:35:17.656365149Z [inf]  total 0
+2026-01-21T15:35:17.656375585Z [inf]  lrwxrwxrwx 1 root root 36 Jan 15 23:01 access_compat.load -> ../mods-available/access_compat.load
+2026-01-21T15:35:17.656385643Z [inf]  lrwxrwxrwx 1 root root 28 Jan 15 23:01 alias.conf -> ../mods-available/alias.conf
+2026-01-21T15:35:17.656395698Z [inf]  lrwxrwxrwx 1 root root 28 Jan 15 23:01 alias.load -> ../mods-available/alias.load
+2026-01-21T15:35:17.656405065Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 auth_basic.load -> ../mods-available/auth_basic.load
+2026-01-21T15:35:17.656413714Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authn_core.load -> ../mods-available/authn_core.load
+2026-01-21T15:35:17.656422462Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authn_file.load -> ../mods-available/authn_file.load
+2026-01-21T15:35:17.656432133Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authz_core.load -> ../mods-available/authz_core.load
+2026-01-21T15:35:17.656450450Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authz_host.load -> ../mods-available/authz_host.load
+2026-01-21T15:35:17.656462438Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authz_user.load -> ../mods-available/authz_user.load
+2026-01-21T15:35:17.656471470Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 autoindex.conf -> ../mods-available/autoindex.conf
+2026-01-21T15:35:17.656480725Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 autoindex.load -> ../mods-available/autoindex.load
+2026-01-21T15:35:17.656489800Z [inf]  lrwxrwxrwx 1 root root 30 Jan 15 23:01 deflate.conf -> ../mods-available/deflate.conf
+2026-01-21T15:35:17.656502750Z [inf]  lrwxrwxrwx 1 root root 30 Jan 15 23:01 deflate.load -> ../mods-available/deflate.load
+2026-01-21T15:35:17.657453765Z [inf]  lrwxrwxrwx 1 root root 31 Jan 15 23:01 setenvif.load -> ../mods-available/setenvif.load
+2026-01-21T15:35:17.657459282Z [inf]  lrwxrwxrwx 1 root root 29 Jan 15 23:01 filter.load -> ../mods-available/filter.load
+2026-01-21T15:35:17.657469799Z [inf]  lrwxrwxrwx 1 root root 29 Jan 15 23:01 status.conf -> ../mods-available/status.conf
+2026-01-21T15:35:17.657475080Z [inf]  lrwxrwxrwx 1 root root 27 Jan 15 23:01 mime.conf -> ../mods-available/mime.conf
+2026-01-21T15:35:17.657484059Z [inf]  lrwxrwxrwx 1 root root 27 Jan 15 23:01 mime.load -> ../mods-available/mime.load
+2026-01-21T15:35:17.657492629Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 mpm_event.conf -> ../mods-available/mpm_event.conf
+2026-01-21T15:35:17.657501696Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 mpm_event.load -> ../mods-available/mpm_event.load
+2026-01-21T15:35:17.657510069Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 mpm_prefork.conf -> ../mods-available/mpm_prefork.conf
+2026-01-21T15:35:17.657518460Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 mpm_prefork.load -> ../mods-available/mpm_prefork.load
+2026-01-21T15:35:17.657527158Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 negotiation.conf -> ../mods-available/negotiation.conf
+2026-01-21T15:35:17.657536163Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 negotiation.load -> ../mods-available/negotiation.load
+2026-01-21T15:35:17.657544369Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:03 php.load -> ../mods-available/php.load
+2026-01-21T15:35:17.657551861Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 reqtimeout.conf -> ../mods-available/reqtimeout.conf
+2026-01-21T15:35:17.657559127Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 reqtimeout.load -> ../mods-available/reqtimeout.load
+2026-01-21T15:35:17.657566931Z [inf]  lrwxrwxrwx 1 root root 30 Jan 21 15:34 rewrite.load -> ../mods-available/rewrite.load
+2026-01-21T15:35:17.657574496Z [inf]  lrwxrwxrwx 1 root root 31 Jan 15 23:01 setenvif.conf -> ../mods-available/setenvif.conf
+2026-01-21T15:35:17.658273861Z [inf]  lrwxrwxrwx 1 root root 29 Jan 15 23:01 status.load -> ../mods-available/status.load
+2026-01-21T15:35:17.687194223Z [err]  AH00534: apache2: Configuration error: More than one MPM loaded.
+2026-01-21T15:35:18.458406939Z [inf]  Running migrations...
+2026-01-21T15:35:18.665342136Z [inf]
+2026-01-21T15:35:18.665350374Z [inf]     INFO  Nothing to migrate.
+2026-01-21T15:35:18.665357427Z [inf]
+2026-01-21T15:35:18.673320968Z [inf]  Caching configuration...
+2026-01-21T15:35:18.803626599Z [inf]
+2026-01-21T15:35:18.803633155Z [inf]     INFO  Configuration cached successfully.
+2026-01-21T15:35:18.803638151Z [inf]
+2026-01-21T15:35:18.975443366Z [inf]
+2026-01-21T15:35:18.975450801Z [inf]     INFO  Routes cached successfully.
+2026-01-21T15:35:18.975457479Z [inf]
+2026-01-21T15:35:19.131444051Z [inf]
+2026-01-21T15:35:19.131449267Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authz_user.load -> ../mods-available/authz_user.load
+2026-01-21T15:35:19.131452477Z [inf]
+2026-01-21T15:35:19.131457590Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 autoindex.conf -> ../mods-available/autoindex.conf
+2026-01-21T15:35:19.131459580Z [inf]     INFO  Blade templates cached successfully.
+2026-01-21T15:35:19.131464976Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 autoindex.load -> ../mods-available/autoindex.load
+2026-01-21T15:35:19.131466186Z [inf]
+2026-01-21T15:35:19.131472882Z [inf]  Starting Apache...
+2026-01-21T15:35:19.131474298Z [inf]  lrwxrwxrwx 1 root root 30 Jan 15 23:01 deflate.conf -> ../mods-available/deflate.conf
+2026-01-21T15:35:19.131480349Z [inf]  Enabled Apache Modules:
+2026-01-21T15:35:19.131481099Z [inf]  lrwxrwxrwx 1 root root 30 Jan 15 23:01 deflate.load -> ../mods-available/deflate.load
+2026-01-21T15:35:19.131485910Z [inf]  total 0
+2026-01-21T15:35:19.131492393Z [inf]  lrwxrwxrwx 1 root root 36 Jan 15 23:01 access_compat.load -> ../mods-available/access_compat.load
+2026-01-21T15:35:19.131498571Z [inf]  lrwxrwxrwx 1 root root 28 Jan 15 23:01 alias.conf -> ../mods-available/alias.conf
+2026-01-21T15:35:19.131505222Z [inf]  lrwxrwxrwx 1 root root 28 Jan 15 23:01 alias.load -> ../mods-available/alias.load
+2026-01-21T15:35:19.131511052Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 auth_basic.load -> ../mods-available/auth_basic.load
+2026-01-21T15:35:19.131516950Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authn_core.load -> ../mods-available/authn_core.load
+2026-01-21T15:35:19.131523362Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authn_file.load -> ../mods-available/authn_file.load
+2026-01-21T15:35:19.131529982Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authz_core.load -> ../mods-available/authz_core.load
+2026-01-21T15:35:19.131536309Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 authz_host.load -> ../mods-available/authz_host.load
+2026-01-21T15:35:19.132242984Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:01 dir.conf -> ../mods-available/dir.conf
+2026-01-21T15:35:19.132248478Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 reqtimeout.load -> ../mods-available/reqtimeout.load
+2026-01-21T15:35:19.132250966Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:01 dir.load -> ../mods-available/dir.load
+2026-01-21T15:35:19.132256126Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:01 env.load -> ../mods-available/env.load
+2026-01-21T15:35:19.132259365Z [inf]  lrwxrwxrwx 1 root root 30 Jan 21 15:34 rewrite.load -> ../mods-available/rewrite.load
+2026-01-21T15:35:19.132265144Z [inf]  lrwxrwxrwx 1 root root 29 Jan 15 23:01 filter.load -> ../mods-available/filter.load
+2026-01-21T15:35:19.132271853Z [inf]  lrwxrwxrwx 1 root root 27 Jan 15 23:01 mime.conf -> ../mods-available/mime.conf
+2026-01-21T15:35:19.132281182Z [inf]  lrwxrwxrwx 1 root root 27 Jan 15 23:01 mime.load -> ../mods-available/mime.load
+2026-01-21T15:35:19.132285281Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 mpm_event.conf -> ../mods-available/mpm_event.conf
+2026-01-21T15:35:19.132289100Z [inf]  lrwxrwxrwx 1 root root 32 Jan 15 23:01 mpm_event.load -> ../mods-available/mpm_event.load
+2026-01-21T15:35:19.132293905Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 mpm_prefork.conf -> ../mods-available/mpm_prefork.conf
+2026-01-21T15:35:19.132297568Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 mpm_prefork.load -> ../mods-available/mpm_prefork.load
+2026-01-21T15:35:19.132302890Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 negotiation.conf -> ../mods-available/negotiation.conf
+2026-01-21T15:35:19.132306783Z [inf]  lrwxrwxrwx 1 root root 34 Jan 15 23:01 negotiation.load -> ../mods-available/negotiation.load
+2026-01-21T15:35:19.132311280Z [inf]  lrwxrwxrwx 1 root root 26 Jan 15 23:03 php.load -> ../mods-available/php.load
+2026-01-21T15:35:19.132315056Z [inf]  lrwxrwxrwx 1 root root 33 Jan 15 23:01 reqtimeout.conf -> ../mods-available/reqtimeout.conf
+2026-01-21T15:35:19.133282105Z [inf]  lrwxrwxrwx 1 root root 31 Jan 15 23:01 setenvif.conf -> ../mods-available/setenvif.conf
+2026-01-21T15:35:19.133290106Z [inf]  lrwxrwxrwx 1 root root 31 Jan 15 23:01 setenvif.load -> ../mods-available/setenvif.load
+2026-01-21T15:35:19.133297064Z [inf]  lrwxrwxrwx 1 root root 29 Jan 15 23:01 status.conf -> ../mods-available/status.conf
+2026-01-21T15:35:19.133306236Z [inf]  lrwxrwxrwx 1 root root 29 Jan 15 23:01 status.load -> ../mods-available/status.load
+2026-01-21T15:35:19.156223464Z [err]  AH00534: apache2: Configuration error: More than one MPM loaded.

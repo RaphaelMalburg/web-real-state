@@ -1,0 +1,15 @@
+// Initialize Lucide icons
+document.addEventListener('DOMContentLoaded', () => {
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+});
+
+// Example: Simple booking button alert
+document.querySelectorAll('.btn-primary').forEach(button => {
+    if (button.textContent.trim() === 'Booking') {
+        button.addEventListener('click', () => {
+            console.log('Booking button clicked');
+        });
+    }
+});
