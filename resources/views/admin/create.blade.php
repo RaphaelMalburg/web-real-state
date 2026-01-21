@@ -9,7 +9,7 @@
                     <h5 class="mb-0">Add New Property</h5>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.store') }}" method="POST">
+                    <form action="{{ route('admin.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row g-3">
                             <div class="col-md-8">
@@ -48,8 +48,8 @@
                                 <input type="number" name="sqft" class="form-control" value="0">
                             </div>
                             <div class="col-12">
-                                <label class="form-label">Main Image URL</label>
-                                <input type="text" name="image_url" class="form-control" placeholder="assets/images/...">
+                                <label class="form-label">Main Image</label>
+                                <input type="file" name="image_url" class="form-control" accept="image/*">
                             </div>
                             <div class="col-12">
                                 <label class="form-label">Gallery Images (comma separated)</label>

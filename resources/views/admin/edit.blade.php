@@ -9,7 +9,7 @@
                     <h5 class="mb-0">Edit Property: {{ $property->title }}</h5>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.update', $property) }}" method="POST">
+                    <form action="{{ route('admin.update', $property) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="row g-3">
@@ -49,8 +49,14 @@
                                 <input type="number" name="sqft" class="form-control" value="{{ $property->sqft }}">
                             </div>
                             <div class="col-12">
-                                <label class="form-label">Main Image URL</label>
-                                <input type="text" name="image_url" class="form-control" value="{{ $property->image_url }}">
+                                <label class="form-label">Main Image</label>
+                                <input type="file" name="image_url" class="form-control" accept="image/*">
+                                @if($property->image_url)
+                                    <div class="mt-2">
+                                        <small>Current Image:</small>
+                                        <img src="{{ $property->image_url }}" alt="Property Image" class="img-thumbnail d-block mt-1" style="max-height: 150px;">
+                                    </div>
+                                @endif
                             </div>
                             <div class="col-12">
                                 <label class="form-label">Gallery Images (comma separated)</label>

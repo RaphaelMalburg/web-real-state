@@ -35,7 +35,12 @@
     <h2 class="text-center mb-4">Featured Properties</h2>
     <div class="row g-4">
         @foreach ($properties as $prop)
-            @php $gallery = explode(',', $prop->gallery_images); @endphp
+            @php 
+                $gallery = array_filter(explode(',', $prop->gallery_images)); 
+                if ($prop->image_url) {
+                    array_unshift($gallery, $prop->image_url);
+                }
+            @endphp
             <div class="col-md-6 col-lg-4">
                 <div class="card property-card h-100 shadow-sm">
                     <!-- Card Images (4 thumbnails) -->
@@ -43,7 +48,7 @@
                         <div class="row g-1">
                             @foreach (array_slice($gallery, 0, 4) as $img)
                                 <div class="col-3">
-                                    <img src="{{ asset(trim($img)) }}"
+                                    <img src="{{ Str::startsWith($img, 'data:') ? $img : asset(trim($img)) }}"
                                          class="img-fluid rounded"
                                          style="height: 60px; width: 100%; object-fit: cover;"
                                          alt="Gallery image"

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminAuthController;
+
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\InquiryController;
@@ -19,8 +21,12 @@ Route::get('/contact', function () {
 Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
 Route::post('/inquiries', [InquiryController::class, 'store'])->name('inquiries.store');
 
+Route::get('/login', [AdminAuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AdminAuthController::class, 'login'])->name('login.post');
+Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
+
 // Admin Routes (Simple for now, can add auth later)
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('index');
     Route::get('/create', [AdminController::class, 'create'])->name('create');
     Route::post('/', [AdminController::class, 'store'])->name('store');

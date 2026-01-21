@@ -27,7 +27,21 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">About Us</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('gallery') }}">Gallery</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact Us</a></li>
-                    <li class="nav-item"><a class="nav-link btn btn-primary text-white ms-lg-3" href="{{ route('admin.index') }}">Admin</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.index') }}" title="Admin Login">
+                            <i data-lucide="user" class="align-text-top"></i>
+                        </a>
+                    </li>
+                    @if(session('admin_logged_in'))
+                        <li class="nav-item ms-lg-2">
+                            <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                                @csrf
+                                <button type="submit" class="nav-link btn btn-link text-danger border-0 p-0 align-baseline">
+                                    <i data-lucide="log-out" class="align-text-top"></i>
+                                </button>
+                            </form>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </div>

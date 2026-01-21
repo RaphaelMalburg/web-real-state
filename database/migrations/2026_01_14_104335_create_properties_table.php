@@ -16,7 +16,7 @@ return new class extends Migration
             $blueprint->string('title');
             $blueprint->text('description')->nullable();
             $blueprint->decimal('price', 15, 2);
-            $blueprint->string('image_url')->nullable();
+            $blueprint->longText('image_url')->nullable();
             $blueprint->text('gallery_images')->nullable();
             $blueprint->enum('type', ['Rent', 'Sale']);
             $blueprint->string('address')->nullable();

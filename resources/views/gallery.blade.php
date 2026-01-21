@@ -19,7 +19,7 @@
                 @foreach ($properties as $prop)
                 <tr>
                     <td>
-                        <img src="{{ asset($prop->image_url) }}"
+                        <img src="{{ Str::startsWith($prop->image_url, 'data:') ? $prop->image_url : asset($prop->image_url) }}"
                              class="gallery-img rounded"
                              alt="{{ $prop->title }}"
                              onerror="this.onerror=null;this.src='{{ asset('assets/images/real-estate/elite-properties/hero/elite-hero-luxury.jpg') }}';">
