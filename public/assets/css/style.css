@@ -1,0 +1,63 @@
+/* Global Styles */
+.navbar-brand { 
+    font-weight: bold; 
+    color: #0d6efd !important; 
+}
+
+/* Hero Section */
+.hero-carousel img { 
+    height: 600px; 
+    object-fit: cover; 
+}
+/* Overlay for better text readability */
+.hero-carousel .carousel-item::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    pointer-events: none;
+}
+.hero-carousel .carousel-caption {
+    z-index: 10;
+}
+
+/* Card Styles */
+.property-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    overflow: hidden;
+}
+
+.property-card img { 
+    height: 200px; 
+    object-fit: cover; 
+}
+
+.property-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+}
+
+/* Gallery Grid Styles */
+.gallery-card-img { 
+    height: 220px; 
+    object-fit: cover;
+    width: 100%; 
+}
+
+/* Footer */
+footer { 
+    background-color: #f8f9fa; 
+    padding: 40px 0; 
+    margin-top: 50px; 
+}
+
+/* Responsive utilities */
+@media (max-width: 768px) {
+    .hero-carousel img {
+        height: 400px;
+    }
+}

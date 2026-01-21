@@ -16,7 +16,7 @@
             <span class="badge bg-primary">{{ $properties->count() }} Total</span>
         </div>
         <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0">
+            <table class="table table-hover align-middle mb-0 text-nowrap">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -57,7 +57,7 @@
                     <span class="badge bg-warning text-dark">{{ $bookings->count() }} Pending</span>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-hover align-middle mb-0">
+                    <table class="table table-hover align-middle mb-0 text-nowrap">
                         <thead>
                             <tr>
                                 <th>User</th>
