@@ -27,7 +27,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($properties as $prop)
+                    @forelse ($properties as $prop)
                     <tr>
                         <td>#{{ $prop->id }}</td>
                         <td>{{ $prop->title }}</td>
@@ -42,7 +42,11 @@
                             </a>
                         </td>
                     </tr>
-                    @endforeach
+                    @empty
+                    <tr>
+                        <td colspan="5" class="text-center text-muted py-4">No properties yet.</td>
+                    </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
@@ -66,7 +70,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($bookings as $booking)
+                            @forelse ($bookings as $booking)
                             <tr>
                                 <td>
                                     <div class="fw-bold">{{ $booking->user_name }}</div>
@@ -75,7 +79,11 @@
                                 <td>{{ $booking->property->title ?? 'N/A' }}</td>
                                 <td>{{ $booking->booking_date }}</td>
                             </tr>
-                            @endforeach
+                            @empty
+                            <tr>
+                                <td colspan="3" class="text-center text-muted py-4">No bookings yet.</td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -90,7 +98,7 @@
                     <span class="badge bg-info">{{ $inquiries->count() }} Total</span>
                 </div>
                 <div class="list-group list-group-flush">
-                    @foreach ($inquiries as $inquiry)
+                    @forelse ($inquiries as $inquiry)
                     <div class="list-group-item">
                         <div class="d-flex w-100 justify-content-between">
                             <h6 class="mb-1">{{ $inquiry->name }}</h6>
@@ -99,7 +107,9 @@
                         <p class="mb-1 small text-muted">{{ $inquiry->email }}</p>
                         <p class="mb-0 small">{{ Str::limit($inquiry->question, 100) }}</p>
                     </div>
-                    @endforeach
+                    @empty
+                    <div class="list-group-item text-center text-muted py-4">No inquiries yet.</div>
+                    @endforelse
                 </div>
             </div>
         </div>

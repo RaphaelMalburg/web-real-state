@@ -13,15 +13,24 @@
                         @csrf
                         <div class="mb-4">
                             <label class="form-label">Full Name</label>
-                            <input type="text" name="name" class="form-control" required placeholder="Enter your name">
+                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" required placeholder="Enter your name" value="{{ old('name') }}">
+                            @error('name')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mb-4">
                             <label class="form-label">Email Address</label>
-                            <input type="email" name="email" class="form-control" required placeholder="Enter your email">
+                            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" required placeholder="Enter your email" value="{{ old('email') }}">
+                            @error('email')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mb-4">
                             <label class="form-label">Your Question</label>
-                            <textarea name="question" class="form-control" rows="5" required placeholder="How can we help you?"></textarea>
+                            <textarea name="question" class="form-control @error('question') is-invalid @enderror" rows="5" required placeholder="How can we help you?">{{ old('question') }}</textarea>
+                            @error('question')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary btn-lg">Send Message</button>

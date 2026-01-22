@@ -23,12 +23,20 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">About Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('gallery') }}">Gallery</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact Us</a></li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.index') }}" title="Admin Login">
+                        <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}" @if(request()->routeIs('home')) aria-current="page" @endif>Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}" @if(request()->routeIs('about')) aria-current="page" @endif>About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('gallery') ? 'active' : '' }}" href="{{ route('gallery') }}" @if(request()->routeIs('gallery')) aria-current="page" @endif>Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}" @if(request()->routeIs('contact')) aria-current="page" @endif>Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-icon {{ request()->routeIs('admin.*') ? 'active' : '' }}" href="{{ route('admin.index') }}" title="Admin Login" @if(request()->routeIs('admin.*')) aria-current="page" @endif>
                             <i data-lucide="user" class="align-text-top"></i>
                         </a>
                     </li>
@@ -47,16 +55,33 @@
         </div>
     </nav>
 
-    <main class="py-4">
+    <div class="toast-container position-fixed top-0 end-0 p-3">
         @if(session('success'))
-            <div class="container">
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ session('success') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <div class="toast align-items-center text-bg-success border-0" role="status" aria-live="polite" aria-atomic="true" data-bs-delay="4500">
+                <div class="d-flex">
+                    <div class="toast-body">{{ session('success') }}</div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>
             </div>
         @endif
+        @if($errors->any())
+            <div class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="6000">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        <div class="fw-semibold mb-1">Please fix the highlighted fields.</div>
+                        <ul class="mb-0 ps-3 small">
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        @endif
+    </div>
 
+    <main class="py-4">
         @yield('content')
     </main>
 
@@ -90,10 +115,20 @@
         </div>
     </footer>
 
-    <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JS -->
-    <script src="{{ asset('assets/js/script.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+
+            document.querySelectorAll('.toast').forEach((toastEl) => {
+                const delay = Number.parseInt(toastEl.getAttribute('data-bs-delay') || '4500', 10);
+                const toast = new bootstrap.Toast(toastEl, { delay });
+                toast.show();
+            });
+        });
+    </script>
     @stack('scripts')
 </body>
 </html>

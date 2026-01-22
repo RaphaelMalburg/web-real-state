@@ -118,18 +118,28 @@
                         <form action="{{ route('bookings.store') }}" method="POST">
                             @csrf
                             <input type="hidden" name="property_id" value="{{ $prop->id }}">
+                            @php $isBookingError = (string) old('property_id') === (string) $prop->id; @endphp
                             <div class="modal-body">
                                 <div class="mb-3">
                                     <label class="form-label">Full Name</label>
-                                    <input type="text" name="user_name" class="form-control" required placeholder="John Doe">
+                                    <input type="text" name="user_name" class="form-control {{ $isBookingError && $errors->has('user_name') ? 'is-invalid' : '' }}" required placeholder="John Doe" value="{{ $isBookingError ? old('user_name') : '' }}">
+                                    @if($isBookingError && $errors->has('user_name'))
+                                        <div class="invalid-feedback">{{ $errors->first('user_name') }}</div>
+                                    @endif
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Email Address</label>
-                                    <input type="email" name="user_email" class="form-control" required placeholder="john@example.com">
+                                    <input type="email" name="user_email" class="form-control {{ $isBookingError && $errors->has('user_email') ? 'is-invalid' : '' }}" required placeholder="john@example.com" value="{{ $isBookingError ? old('user_email') : '' }}">
+                                    @if($isBookingError && $errors->has('user_email'))
+                                        <div class="invalid-feedback">{{ $errors->first('user_email') }}</div>
+                                    @endif
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Preferred Date</label>
-                                    <input type="date" name="booking_date" class="form-control" required min="{{ date('Y-m-d', strtotime('+1 day')) }}">
+                                    <input type="date" name="booking_date" class="form-control {{ $isBookingError && $errors->has('booking_date') ? 'is-invalid' : '' }}" required min="{{ date('Y-m-d', strtotime('+1 day')) }}" value="{{ $isBookingError ? old('booking_date') : '' }}">
+                                    @if($isBookingError && $errors->has('booking_date'))
+                                        <div class="invalid-feedback">{{ $errors->first('booking_date') }}</div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="modal-footer">
