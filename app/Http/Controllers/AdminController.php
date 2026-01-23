@@ -39,6 +39,8 @@ class AdminController extends Controller
         ]);
 
         if ($request->hasFile('image_url')) {
+            // Increase memory limit for image processing
+            ini_set('memory_limit', '256M');
             $file = $request->file('image_url');
             $base64 = base64_encode(file_get_contents($file));
             $mime = $file->getMimeType();
@@ -71,15 +73,14 @@ class AdminController extends Controller
         ]);
 
         if ($request->hasFile('image_url')) {
+            // Increase memory limit for image processing
+            ini_set('memory_limit', '256M');
             $file = $request->file('image_url');
             $base64 = base64_encode(file_get_contents($file));
             $mime = $file->getMimeType();
             $validated['image_url'] = 'data:' . $mime . ';base64,' . $base64;
         } else {
-            // If no new image, keep the old one (remove from validated so it doesn't overwrite with null if that passed)
-            // Actually, if it wasn't in the request, it won't be in validated if it's nullable? 
-            // Wait, validate returns only validated data. If 'image_url' is nullable and not present, it might be null or missing.
-            // If it's missing from request, it shouldn't be in $validated?
+            // If no new image, keep the old one
             unset($validated['image_url']);
         }
 
