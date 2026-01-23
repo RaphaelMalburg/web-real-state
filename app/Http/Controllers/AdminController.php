@@ -39,7 +39,7 @@ class AdminController extends Controller
         ]);
 
         // Increase memory limit for image processing
-        ini_set('memory_limit', '512M');
+        ini_set('memory_limit', '1024M'); // Increased to 1024M
 
         if ($request->hasFile('image_url')) {
             $file = $request->file('image_url');
@@ -57,7 +57,7 @@ class AdminController extends Controller
                 $galleryData[] = 'data:' . $mime . ';base64,' . $base64;
             }
         }
-        
+
         // Store as JSON
         $validated['gallery_images'] = !empty($galleryData) ? json_encode($galleryData) : null;
 
@@ -87,7 +87,7 @@ class AdminController extends Controller
         ]);
 
         // Increase memory limit for image processing
-        ini_set('memory_limit', '512M');
+        ini_set('memory_limit', '1024M'); // Increased to 1024M
 
         if ($request->hasFile('image_url')) {
             $file = $request->file('image_url');
@@ -99,15 +99,15 @@ class AdminController extends Controller
             unset($validated['image_url']);
         }
 
-        // Handle Gallery Images (Append to existing or replace? Usually replace or append. Let's append if new ones provided, but user might want to delete. 
-        // For simplicity in this "nothing fancy" request: if new images uploaded, we ADD them. 
-        // Actually, "make that upload field better" usually implies replacing or adding. 
-        // Let's implement: New uploads replace old gallery? Or append? 
+        // Handle Gallery Images (Append to existing or replace? Usually replace or append. Let's append if new ones provided, but user might want to delete.
+        // For simplicity in this "nothing fancy" request: if new images uploaded, we ADD them.
+        // Actually, "make that upload field better" usually implies replacing or adding.
+        // Let's implement: New uploads replace old gallery? Or append?
         // Standard "file input" behavior is "replace" if you select new files. But since we are storing in DB...
         // Let's go with: If files uploaded, REPLACE the gallery. (Simplest logic for now).
-        // Wait, if I want to KEEP existing, I need a way to manage them. 
+        // Wait, if I want to KEEP existing, I need a way to manage them.
         // Given the constraints, let's just APPEND new images to existing ones.
-        
+
         $currentGallery = [];
         if ($property->gallery_images) {
             $decoded = json_decode($property->gallery_images, true);
@@ -129,7 +129,7 @@ class AdminController extends Controller
             $validated['gallery_images'] = json_encode($currentGallery);
         } else {
              // If no new files, keep existing (unset so it doesn't overwrite with null)
-             // But wait, if they want to clear it? There's no "clear" button yet. 
+             // But wait, if they want to clear it? There's no "clear" button yet.
              // For now, if no file sent, we don't touch the gallery.
              unset($validated['gallery_images']);
         }
