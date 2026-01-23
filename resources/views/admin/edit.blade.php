@@ -86,11 +86,28 @@
                                 @endif
                             </div>
                             <div class="col-12">
-                                <label class="form-label">Gallery Images (comma separated)</label>
-                                <input type="text" name="gallery_images" class="form-control @error('gallery_images') is-invalid @enderror" value="{{ old('gallery_images', $property->gallery_images) }}">
+                                <label class="form-label">Gallery Images (Add new images)</label>
+                                <input type="file" name="gallery_images[]" class="form-control @error('gallery_images') is-invalid @enderror" multiple accept="image/*">
                                 @error('gallery_images')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
+                                @if($property->gallery_images)
+                                    <div class="mt-2">
+                                        <small>Current Gallery (URLs/Base64):</small>
+                                        <div class="d-flex gap-2 flex-wrap mt-1">
+                                            @php
+                                                // Handle both JSON and legacy comma-separated
+                                                $gallery = json_decode($property->gallery_images, true);
+                                                if (!is_array($gallery)) {
+                                                    $gallery = array_filter(explode(',', $property->gallery_images));
+                                                }
+                                            @endphp
+                                            @foreach($gallery as $img)
+                                                <img src="{{ Str::startsWith($img, 'data:') ? $img : asset(trim($img)) }}" class="img-thumbnail" style="height: 80px; width: 80px; object-fit: cover;">
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         <div class="mt-4 d-flex gap-2">

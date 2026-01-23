@@ -79,11 +79,14 @@
                                 @enderror
                             </div>
                             <div class="col-12">
-                                <label class="form-label">Gallery Images (comma separated)</label>
-                                <input type="text" name="gallery_images" class="form-control @error('gallery_images') is-invalid @enderror" placeholder="img1.jpg,img2.jpg,..." value="{{ old('gallery_images') }}">
+                                <label class="form-label">Gallery Images (Multiple selection allowed)</label>
+                                <input type="file" name="gallery_images[]" class="form-control @error('gallery_images') is-invalid @enderror" multiple accept="image/*">
                                 @error('gallery_images')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
+                                @if($errors->has('gallery_images.*'))
+                                    <div class="text-danger small mt-1">One or more files are invalid.</div>
+                                @endif
                             </div>
                         </div>
                         <div class="mt-4 d-flex gap-2">
