@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -11,9 +12,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('properties', function (Blueprint $table) {
-            $table->longText('gallery_images')->nullable()->change();
-        });
+        $driver = DB::getDriverName();
+        if ($driver === 'mysql' || $driver === 'mariadb') {
+            DB::statement('ALTER TABLE properties MODIFY gallery_images LONGTEXT NULL');
+            return;
+        }
+
+        if ($driver === 'pgsql') {
+            DB::statement('ALTER TABLE properties ALTER COLUMN gallery_images TYPE TEXT');
+            DB::statement('ALTER TABLE properties ALTER COLUMN gallery_images DROP NOT NULL');
+            return;
+        }
     }
 
     /**
@@ -21,8 +30,16 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('properties', function (Blueprint $table) {
-            $table->text('gallery_images')->nullable()->change();
-        });
+        $driver = DB::getDriverName();
+        if ($driver === 'mysql' || $driver === 'mariadb') {
+            DB::statement('ALTER TABLE properties MODIFY gallery_images TEXT NULL');
+            return;
+        }
+
+        if ($driver === 'pgsql') {
+            DB::statement('ALTER TABLE properties ALTER COLUMN gallery_images TYPE TEXT');
+            DB::statement('ALTER TABLE properties ALTER COLUMN gallery_images DROP NOT NULL');
+            return;
+        }
     }
 };

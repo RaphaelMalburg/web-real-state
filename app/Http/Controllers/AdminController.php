@@ -6,6 +6,7 @@ use App\Models\Booking;
 use App\Models\Inquiry;
 use App\Models\Property;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class AdminController extends Controller
 {
@@ -29,11 +30,19 @@ class AdminController extends Controller
         // Increase memory for this operation
         ini_set('memory_limit', '512M');
 
-        $imageString = file_get_contents($file);
-        $image = imagecreatefromstring($imageString);
-        
-        if (!$image) {
+        $path = $file->getRealPath();
+        $imageString = $path ? file_get_contents($path) : file_get_contents($file);
+        if ($imageString === false) {
             return null;
+        }
+
+        $mime = $file->getMimeType();
+        $image = @imagecreatefromstring($imageString);
+        if (!$image) {
+            if (!$mime) {
+                return null;
+            }
+            return 'data:' . $mime . ';base64,' . base64_encode($imageString);
         }
 
         // Get original dimensions
@@ -45,11 +54,11 @@ class AdminController extends Controller
             $newWidth = $maxWidth;
             $newHeight = intval($height * ($newWidth / $width));
             $resized = imagecreatetruecolor($newWidth, $newHeight);
-            
+
             // Handle transparency for PNG/GIF
             imagealphablending($resized, false);
             imagesavealpha($resized, true);
-            
+
             imagecopyresampled($resized, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
             imagedestroy($image);
             $image = $resized;
@@ -62,23 +71,22 @@ class AdminController extends Controller
         // If transparency is critical (PNG), we'd need logic to check type.
         // Let's stick to original mime type if possible, or force JPEG for size.
         // For real estate photos, JPEG is standard.
-        
-        // Check original mime
-        $mime = $file->getMimeType();
-        if ($mime === 'image/png') {
+
+        $outputMime = $mime === 'image/png' ? 'image/png' : 'image/jpeg';
+        if ($outputMime === 'image/png') {
              // PNG compression (0-9, 9 is max compression)
              // We can convert PNG to JPG to save space if transparency isn't used.
              // Let's preserve PNG but compress.
-             imagepng($image, null, 6); 
+             imagepng($image, null, 6);
         } else {
              // JPEG
              imagejpeg($image, null, $quality);
         }
-        
+
         $contents = ob_get_clean();
         imagedestroy($image);
 
-        return 'data:' . $mime . ';base64,' . base64_encode($contents);
+        return 'data:' . $outputMime . ';base64,' . base64_encode($contents);
     }
 
     public function store(Request $request)
@@ -88,8 +96,8 @@ class AdminController extends Controller
             'description' => 'required|string',
             'price' => 'required|numeric',
             'type' => 'required|in:Rent,Sale',
-            'image_url' => 'nullable|image|max:10240', // 10MB Max
-            'gallery_images.*' => 'nullable|image|max:10240', // Validate each gallery image
+            'image_url' => 'nullable|image|mimes:jpg,jpeg,png|max:10240',
+            'gallery_images.*' => 'nullable|image|mimes:jpg,jpeg,png|max:10240',
             'address' => 'nullable|string',
             'bedrooms' => 'nullable|integer',
             'bathrooms' => 'nullable|integer',
@@ -98,9 +106,10 @@ class AdminController extends Controller
 
         if ($request->hasFile('image_url')) {
             $processed = $this->processImage($request->file('image_url'));
-            if ($processed) {
-                $validated['image_url'] = $processed;
+            if (!$processed) {
+                return back()->withErrors(['image_url' => 'Unable to process the main image.'])->withInput();
             }
+            $validated['image_url'] = $processed;
         }
 
         // Handle Gallery Images
@@ -108,12 +117,13 @@ class AdminController extends Controller
         if ($request->hasFile('gallery_images')) {
             foreach ($request->file('gallery_images') as $file) {
                 $processed = $this->processImage($file);
-                if ($processed) {
-                    $galleryData[] = $processed;
+                if (!$processed) {
+                    return back()->withErrors(['gallery_images' => 'One or more gallery images could not be processed.'])->withInput();
                 }
+                $galleryData[] = $processed;
             }
         }
-        
+
         // Store as JSON
         $validated['gallery_images'] = !empty($galleryData) ? json_encode($galleryData) : null;
 
@@ -134,8 +144,8 @@ class AdminController extends Controller
             'description' => 'required|string',
             'price' => 'required|numeric',
             'type' => 'required|in:Rent,Sale',
-            'image_url' => 'nullable|image|max:10240',
-            'gallery_images.*' => 'nullable|image|max:10240',
+            'image_url' => 'nullable|image|mimes:jpg,jpeg,png|max:10240',
+            'gallery_images.*' => 'nullable|image|mimes:jpg,jpeg,png|max:10240',
             'address' => 'nullable|string',
             'bedrooms' => 'nullable|integer',
             'bathrooms' => 'nullable|integer',
@@ -144,9 +154,10 @@ class AdminController extends Controller
 
         if ($request->hasFile('image_url')) {
             $processed = $this->processImage($request->file('image_url'));
-            if ($processed) {
-                $validated['image_url'] = $processed;
+            if (!$processed) {
+                return back()->withErrors(['image_url' => 'Unable to process the main image.'])->withInput();
             }
+            $validated['image_url'] = $processed;
         } else {
             // If no new image, keep the old one
             unset($validated['image_url']);
@@ -167,9 +178,10 @@ class AdminController extends Controller
         if ($request->hasFile('gallery_images')) {
             foreach ($request->file('gallery_images') as $file) {
                 $processed = $this->processImage($file);
-                if ($processed) {
-                    $currentGallery[] = $processed;
+                if (!$processed) {
+                    return back()->withErrors(['gallery_images' => 'One or more gallery images could not be processed.'])->withInput();
                 }
+                $currentGallery[] = $processed;
             }
             // Update the validated array with the merged gallery
             $validated['gallery_images'] = json_encode($currentGallery);
@@ -191,5 +203,110 @@ class AdminController extends Controller
     {
         $property->delete();
         return redirect()->route('admin.index')->with('success', 'Property removed successfully.');
+    }
+
+    public function aiGenerateDescription(Request $request)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'type' => 'required|in:Rent,Sale',
+            'price' => 'required|numeric',
+            'address' => 'nullable|string',
+            'bedrooms' => 'nullable|integer',
+            'bathrooms' => 'nullable|integer',
+            'sqft' => 'nullable|integer',
+        ]);
+
+        $lines = [
+            'Title: '.$validated['title'],
+            'Type: '.$validated['type'],
+            'Price: '.$validated['price'],
+        ];
+
+        if (!empty($validated['address'])) {
+            $lines[] = 'Address: '.$validated['address'];
+        }
+        if (!empty($validated['bedrooms'])) {
+            $lines[] = 'Bedrooms: '.$validated['bedrooms'];
+        }
+        if (!empty($validated['bathrooms'])) {
+            $lines[] = 'Bathrooms: '.$validated['bathrooms'];
+        }
+        if (!empty($validated['sqft'])) {
+            $lines[] = 'Sqft: '.$validated['sqft'];
+        }
+
+        $messages = [
+            [
+                'role' => 'system',
+                'content' => 'You write concise real estate listing descriptions. Use a professional tone, 2-3 sentences, no emojis.',
+            ],
+            [
+                'role' => 'user',
+                'content' => "Create a polished listing description using the details below:\n".implode("\n", $lines),
+            ],
+        ];
+
+        $description = $this->openRouterRequest($messages, 220, 0.7);
+        if (!$description) {
+            return response()->json(['message' => 'AI service is unavailable.'], 422);
+        }
+
+        return response()->json(['text' => $description]);
+    }
+
+    public function aiImproveDescription(Request $request)
+    {
+        $validated = $request->validate([
+            'description' => 'required|string',
+        ]);
+
+        $messages = [
+            [
+                'role' => 'system',
+                'content' => 'Improve real estate descriptions for clarity and flow. Keep facts, 2-3 sentences, no emojis.',
+            ],
+            [
+                'role' => 'user',
+                'content' => "Improve this description:\n".$validated['description'],
+            ],
+        ];
+
+        $description = $this->openRouterRequest($messages, 220, 0.5);
+        if (!$description) {
+            return response()->json(['message' => 'AI service is unavailable.'], 422);
+        }
+
+        return response()->json(['text' => $description]);
+    }
+
+    private function openRouterRequest(array $messages, int $maxTokens = 220, float $temperature = 0.6): ?string
+    {
+        $apiKey = env('OPENROUTER_API_KEY');
+        if (!$apiKey) {
+            return null;
+        }
+
+        $response = Http::timeout(45)->withHeaders([
+            'Authorization' => 'Bearer '.$apiKey,
+            'HTTP-Referer' => config('app.url'),
+            'X-Title' => config('app.name'),
+        ])->post('https://openrouter.ai/api/v1/chat/completions', [
+            'model' => env('OPENROUTER_MODEL', 'openrouter/auto'),
+            'messages' => $messages,
+            'temperature' => $temperature,
+            'max_tokens' => $maxTokens,
+        ]);
+
+        if (!$response->successful()) {
+            return null;
+        }
+
+        $content = data_get($response->json(), 'choices.0.message.content');
+        if (!is_string($content)) {
+            return null;
+        }
+
+        return trim($content);
     }
 }

@@ -32,6 +32,10 @@
                             </div>
                             <div class="col-12">
                                 <label class="form-label">Description</label>
+                                <div id="ai-description-tools" class="d-flex flex-wrap gap-2 mb-2" data-generate-url="{{ route('admin.ai.description') }}" data-improve-url="{{ route('admin.ai.description_improve') }}">
+                                    <button type="button" class="btn btn-outline-primary btn-sm" data-ai-action="generate">Generate Description</button>
+                                    <button type="button" class="btn btn-outline-secondary btn-sm" data-ai-action="improve">Polish Description</button>
+                                </div>
                                 <textarea name="description" class="form-control @error('description') is-invalid @enderror" rows="4" required>{{ old('description', $property->description) }}</textarea>
                                 @error('description')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -121,3 +125,73 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const tools = document.getElementById('ai-description-tools');
+        if (!tools) {
+            return;
+        }
+
+        const descriptionField = document.querySelector('[name="description"]');
+        const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+
+        const getPayload = (action) => {
+            if (action === 'improve') {
+                return { description: descriptionField?.value || '' };
+            }
+
+            return {
+                title: document.querySelector('[name="title"]')?.value || '',
+                type: document.querySelector('[name="type"]')?.value || '',
+                price: document.querySelector('[name="price"]')?.value || '',
+                address: document.querySelector('[name="address"]')?.value || '',
+                bedrooms: document.querySelector('[name="bedrooms"]')?.value || '',
+                bathrooms: document.querySelector('[name="bathrooms"]')?.value || '',
+                sqft: document.querySelector('[name="sqft"]')?.value || ''
+            };
+        };
+
+        tools.querySelectorAll('[data-ai-action]').forEach((button) => {
+            button.addEventListener('click', async () => {
+                const action = button.getAttribute('data-ai-action');
+                const url = action === 'improve' ? tools.dataset.improveUrl : tools.dataset.generateUrl;
+                if (!url || !descriptionField) {
+                    return;
+                }
+
+                button.disabled = true;
+                button.classList.add('disabled');
+
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            'X-CSRF-TOKEN': csrfToken || ''
+                        },
+                        body: JSON.stringify(getPayload(action))
+                    });
+
+                    const data = await response.json();
+                    if (!response.ok) {
+                        throw new Error(data?.message || 'Unable to generate description.');
+                    }
+
+                    if (data?.text) {
+                        descriptionField.value = data.text;
+                        descriptionField.dispatchEvent(new Event('input'));
+                    }
+                } catch (error) {
+                    window.alert(error?.message || 'Unable to generate description.');
+                } finally {
+                    button.disabled = false;
+                    button.classList.remove('disabled');
+                }
+            });
+        });
+    });
+</script>
+@endpush

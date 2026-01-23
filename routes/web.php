@@ -30,6 +30,8 @@ Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function
     Route::get('/', [AdminController::class, 'index'])->name('index');
     Route::get('/create', [AdminController::class, 'create'])->name('create');
     Route::post('/', [AdminController::class, 'store'])->name('store');
+    Route::post('/ai/description', [AdminController::class, 'aiGenerateDescription'])->name('ai.description');
+    Route::post('/ai/description-improve', [AdminController::class, 'aiImproveDescription'])->name('ai.description_improve');
     Route::get('/{property}/edit', [AdminController::class, 'edit'])->name('edit');
     Route::put('/{property}', [AdminController::class, 'update'])->name('update');
     Route::delete('/{property}', [AdminController::class, 'destroy'])->name('destroy');

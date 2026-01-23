@@ -36,7 +36,11 @@
     <div class="row g-4">
         @foreach ($properties as $prop)
             @php 
-                $gallery = array_filter(explode(',', $prop->gallery_images)); 
+                $gallery = [];
+                if ($prop->gallery_images) {
+                    $decoded = json_decode($prop->gallery_images, true);
+                    $gallery = is_array($decoded) ? $decoded : array_filter(explode(',', $prop->gallery_images));
+                }
                 if ($prop->image_url) {
                     array_unshift($gallery, $prop->image_url);
                 }
