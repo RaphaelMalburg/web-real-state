@@ -23,6 +23,64 @@ class AdminController extends Controller
         return view('admin.create');
     }
 
+    // Helper to process image: Resize & Compress
+    private function processImage($file, $maxWidth = 1024, $quality = 75)
+    {
+        // Increase memory for this operation
+        ini_set('memory_limit', '512M');
+
+        $imageString = file_get_contents($file);
+        $image = imagecreatefromstring($imageString);
+        
+        if (!$image) {
+            return null;
+        }
+
+        // Get original dimensions
+        $width = imagesx($image);
+        $height = imagesy($image);
+
+        // Resize if needed
+        if ($width > $maxWidth) {
+            $newWidth = $maxWidth;
+            $newHeight = intval($height * ($newWidth / $width));
+            $resized = imagecreatetruecolor($newWidth, $newHeight);
+            
+            // Handle transparency for PNG/GIF
+            imagealphablending($resized, false);
+            imagesavealpha($resized, true);
+            
+            imagecopyresampled($resized, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+            imagedestroy($image);
+            $image = $resized;
+        }
+
+        // Buffer output
+        ob_start();
+        // Convert everything to JPEG for consistent compression (or keep format if needed)
+        // For simplicity in this POC, let's output as JPEG which compresses well.
+        // If transparency is critical (PNG), we'd need logic to check type.
+        // Let's stick to original mime type if possible, or force JPEG for size.
+        // For real estate photos, JPEG is standard.
+        
+        // Check original mime
+        $mime = $file->getMimeType();
+        if ($mime === 'image/png') {
+             // PNG compression (0-9, 9 is max compression)
+             // We can convert PNG to JPG to save space if transparency isn't used.
+             // Let's preserve PNG but compress.
+             imagepng($image, null, 6); 
+        } else {
+             // JPEG
+             imagejpeg($image, null, $quality);
+        }
+        
+        $contents = ob_get_clean();
+        imagedestroy($image);
+
+        return 'data:' . $mime . ';base64,' . base64_encode($contents);
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -38,26 +96,24 @@ class AdminController extends Controller
             'sqft' => 'nullable|integer',
         ]);
 
-        // Increase memory limit for image processing
-        ini_set('memory_limit', '1024M'); // Increased to 1024M
-
         if ($request->hasFile('image_url')) {
-            $file = $request->file('image_url');
-            $base64 = base64_encode(file_get_contents($file));
-            $mime = $file->getMimeType();
-            $validated['image_url'] = 'data:' . $mime . ';base64,' . $base64;
+            $processed = $this->processImage($request->file('image_url'));
+            if ($processed) {
+                $validated['image_url'] = $processed;
+            }
         }
 
         // Handle Gallery Images
         $galleryData = [];
         if ($request->hasFile('gallery_images')) {
             foreach ($request->file('gallery_images') as $file) {
-                $base64 = base64_encode(file_get_contents($file));
-                $mime = $file->getMimeType();
-                $galleryData[] = 'data:' . $mime . ';base64,' . $base64;
+                $processed = $this->processImage($file);
+                if ($processed) {
+                    $galleryData[] = $processed;
+                }
             }
         }
-
+        
         // Store as JSON
         $validated['gallery_images'] = !empty($galleryData) ? json_encode($galleryData) : null;
 
@@ -86,28 +142,17 @@ class AdminController extends Controller
             'sqft' => 'nullable|integer',
         ]);
 
-        // Increase memory limit for image processing
-        ini_set('memory_limit', '1024M'); // Increased to 1024M
-
         if ($request->hasFile('image_url')) {
-            $file = $request->file('image_url');
-            $base64 = base64_encode(file_get_contents($file));
-            $mime = $file->getMimeType();
-            $validated['image_url'] = 'data:' . $mime . ';base64,' . $base64;
+            $processed = $this->processImage($request->file('image_url'));
+            if ($processed) {
+                $validated['image_url'] = $processed;
+            }
         } else {
             // If no new image, keep the old one
             unset($validated['image_url']);
         }
 
-        // Handle Gallery Images (Append to existing or replace? Usually replace or append. Let's append if new ones provided, but user might want to delete.
-        // For simplicity in this "nothing fancy" request: if new images uploaded, we ADD them.
-        // Actually, "make that upload field better" usually implies replacing or adding.
-        // Let's implement: New uploads replace old gallery? Or append?
-        // Standard "file input" behavior is "replace" if you select new files. But since we are storing in DB...
-        // Let's go with: If files uploaded, REPLACE the gallery. (Simplest logic for now).
-        // Wait, if I want to KEEP existing, I need a way to manage them.
-        // Given the constraints, let's just APPEND new images to existing ones.
-
+        // Handle Gallery Images
         $currentGallery = [];
         if ($property->gallery_images) {
             $decoded = json_decode($property->gallery_images, true);
@@ -121,16 +166,14 @@ class AdminController extends Controller
 
         if ($request->hasFile('gallery_images')) {
             foreach ($request->file('gallery_images') as $file) {
-                $base64 = base64_encode(file_get_contents($file));
-                $mime = $file->getMimeType();
-                $currentGallery[] = 'data:' . $mime . ';base64,' . $base64;
+                $processed = $this->processImage($file);
+                if ($processed) {
+                    $currentGallery[] = $processed;
+                }
             }
             // Update the validated array with the merged gallery
             $validated['gallery_images'] = json_encode($currentGallery);
         } else {
-             // If no new files, keep existing (unset so it doesn't overwrite with null)
-             // But wait, if they want to clear it? There's no "clear" button yet.
-             // For now, if no file sent, we don't touch the gallery.
              unset($validated['gallery_images']);
         }
 
