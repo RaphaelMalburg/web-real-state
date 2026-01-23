@@ -1,9 +1,18 @@
 #!/bin/bash
 set -e
 
+# Ensure storage directories exist (volume mounts can be empty on first boot)
+mkdir -p storage/framework/cache storage/framework/views storage/framework/sessions storage/framework/testing storage/app/public bootstrap/cache
+
 # Run migrations
 echo "Running migrations..."
 php artisan migrate --force
+php artisan storage:link || true
+
+# Fix permissions for SQLite and storage
+echo "Fixing permissions..."
+chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Clear and cache config
 echo "Caching configuration..."
