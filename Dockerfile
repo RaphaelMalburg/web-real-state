@@ -46,11 +46,8 @@ RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
-# Fix Apache MPM conflict (force remove event/worker, enable prefork)
-RUN rm -f /etc/apache2/mods-enabled/mpm_event.load \
-    /etc/apache2/mods-enabled/mpm_event.conf \
-    /etc/apache2/mods-enabled/mpm_worker.load \
-    /etc/apache2/mods-enabled/mpm_worker.conf \
+# Fix Apache MPM conflict (force disable event/worker, enable prefork)
+RUN a2dismod mpm_event mpm_worker || true \
     && a2enmod mpm_prefork
 
 # Copy entrypoint script

@@ -17,10 +17,10 @@ chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Clear and cache config
-echo "Caching configuration..."
-php artisan config:cache
-php artisan route:cache
+echo "Optimizing application..."
+php artisan optimize
 php artisan view:cache
+php artisan event:cache || true
 
 # Start Apache
 echo "Starting Apache..."
@@ -41,14 +41,7 @@ cat /etc/apache2/ports.conf
 echo "--------------------------"
 
 echo "Fixing MPM conflicts..."
-rm -f /etc/apache2/mods-enabled/mpm_event.conf
-rm -f /etc/apache2/mods-enabled/mpm_event.load
-rm -f /etc/apache2/mods-enabled/mpm_worker.conf
-rm -f /etc/apache2/mods-enabled/mpm_worker.load
-# Ensure prefork is enabled (symlink if missing)
-if [ ! -f /etc/apache2/mods-enabled/mpm_prefork.load ]; then
-    ln -s ../mods-available/mpm_prefork.load /etc/apache2/mods-enabled/mpm_prefork.load
-    ln -s ../mods-available/mpm_prefork.conf /etc/apache2/mods-enabled/mpm_prefork.conf
-fi
+a2dismod mpm_event mpm_worker || true
+a2enmod mpm_prefork || true
 
 exec apache2-foreground
