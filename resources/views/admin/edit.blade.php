@@ -84,82 +84,113 @@
                                 @enderror
                             </div>
                             <div class="col-12">
-                                <label class="form-label">Main Image</label>
-                                <input type="file" name="image_url" class="form-control @error('image_url') is-invalid @enderror" accept="image/*">
-                                @error('image_url')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                                <div class="mt-2">
-                                    <div id="ai-image-tools" class="d-flex flex-wrap gap-2" data-generate-url="{{ route('admin.ai.image') }}">
-                                        <button type="button" class="btn btn-outline-primary btn-sm" data-ai-image-action="generate">
-                                            Generate Main Image
-                                            <span class="spinner-border spinner-border-sm ms-2 d-none" data-spinner></span>
-                                        </button>
-                                        <input type="text" id="ai-image-style" class="form-control form-control-sm" placeholder="Optional style notes">
-                                    </div>
-                                    <input type="hidden" name="generated_image_url" id="generated_image_url">
-                                    <div id="ai-image-preview" class="mt-2 d-none">
-                                        <img id="generated_image_preview" src="" alt="Generated property image" class="img-thumbnail" style="max-height: 160px;">
-                                    </div>
-                                    <div id="ai-image-status" class="small mt-2 d-none"></div>
-                                </div>
-                                @if($property->image_url)
-                                    <div class="mt-2">
-                                        <small>Current Image:</small>
-                                        <div id="current-image-wrapper" class="d-flex align-items-center gap-3 mt-1 flex-wrap">
-                                            <img src="{{ Str::startsWith($property->image_url, 'data:') ? $property->image_url : asset($property->image_url) }}" alt="Property Image" class="img-thumbnail" style="max-height: 150px;">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="remove_image_url" id="remove_image_url" value="1">
-                                                <label class="form-check-label" for="remove_image_url">Remove main image</label>
-                                            </div>
-                                            <span id="current-image-flag" class="badge bg-warning text-dark d-none">Marked for removal</span>
+                                <label class="form-label fw-bold">Main Image</label>
+                                <div class="card bg-light border-dashed p-4 mb-3">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-6">
+                                            <input type="file" name="image_url" class="form-control @error('image_url') is-invalid @enderror" accept="image/*">
+                                            <div class="form-text mt-2">Upload a new image or use AI to generate one.</div>
                                         </div>
-                                    </div>
-                                @endif
-                            </div>
-                            <div class="col-12">
-                                <label class="form-label">Gallery Images (Add new images)</label>
-                                <input type="file" name="gallery_images[]" class="form-control @error('gallery_images') is-invalid @enderror" multiple accept="image/*">
-                                <div id="ai-gallery-tools" class="d-flex flex-wrap gap-2 mt-2 align-items-center" data-generate-url="{{ route('admin.ai.gallery') }}">
-                                    <button type="button" class="btn btn-outline-primary btn-sm" data-ai-gallery-action="generate">
-                                        Generate Gallery Images
-                                        <span class="spinner-border spinner-border-sm ms-2 d-none" data-spinner></span>
-                                    </button>
-                                    <div class="input-group input-group-sm" style="width: 150px;">
-                                        <span class="input-group-text">Qty</span>
-                                        <input type="number" id="ai-gallery-qty" class="form-control" value="2" min="1" max="4">
-                                    </div>
-                                </div>
-                                <div id="generated-gallery-inputs"></div>
-                                <div id="ai-gallery-preview" class="d-flex gap-2 flex-wrap mt-2"></div>
-                                <div id="ai-gallery-status" class="small mt-2 d-none"></div>
-                                @error('gallery_images')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                                @if($property->gallery_images)
-                                    <div class="mt-2">
-                                        <small>Current Gallery:</small>
-                                        <div class="d-flex gap-2 flex-wrap mt-1">
-                                            @php
-                                                // Handle both JSON and legacy comma-separated
-                                                $gallery = json_decode($property->gallery_images, true);
-                                                if (!is_array($gallery)) {
-                                                    $gallery = array_filter(explode(',', $property->gallery_images));
-                                                }
-                                            @endphp
-                                            @foreach($gallery as $img)
-                                                <div class="d-flex flex-column align-items-center gap-1" data-gallery-item>
-                                                    <img src="{{ Str::startsWith($img, 'data:') ? $img : asset(trim($img)) }}" class="img-thumbnail" style="height: 80px; width: 80px; object-fit: cover;">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="remove_gallery_images[]" value="{{ trim($img) }}">
-                                                        <label class="form-check-label small">Remove</label>
-                                                    </div>
-                                                    <span class="badge bg-warning text-dark d-none" data-remove-flag>Marked for removal</span>
+                                        <div class="col-md-6 border-start ps-md-4 mt-3 mt-md-0">
+                                            <div id="ai-image-tools" data-generate-url="{{ route('admin.ai.image') }}">
+                                                <div class="d-flex gap-2 mb-2">
+                                                    <input type="text" id="ai-image-style" class="form-control form-control-sm" placeholder="e.g. Modern, minimalist, garden view">
+                                                    <button type="button" class="btn btn-primary btn-sm px-3" data-ai-image-action="generate">
+                                                        <i data-lucide="sparkles" class="size-4 me-1"></i> Generate
+                                                        <span class="spinner-border spinner-border-sm ms-2 d-none" data-spinner></span>
+                                                    </button>
                                                 </div>
-                                            @endforeach
+                                                <div id="ai-image-status" class="small d-none"></div>
+                                            </div>
                                         </div>
                                     </div>
-                                @endif
+
+                                    <input type="hidden" name="generated_image_url" id="generated_image_url">
+                                    <div id="ai-image-preview" class="mt-4 d-none text-center border-top pt-4">
+                                        <div class="position-relative d-inline-block">
+                                            <img id="generated_image_preview" src="" alt="Generated property image" class="img-thumbnail shadow-sm" style="max-height: 240px;">
+                                            <div class="position-absolute top-0 start-100 translate-middle">
+                                                <span class="badge rounded-pill bg-success shadow">AI Generated</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @if($property->image_url)
+                                        <div class="mt-4 border-top pt-4">
+                                            <label class="form-label small fw-bold text-muted">Current Main Image</label>
+                                            <div id="current-image-wrapper" class="d-flex align-items-center gap-3 mt-1 flex-wrap">
+                                                <img src="{{ Str::startsWith($property->image_url, 'data:') ? $property->image_url : asset($property->image_url) }}" alt="Property Image" class="img-thumbnail" style="max-height: 150px;">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="remove_image_url" id="remove_image_url" value="1">
+                                                    <label class="form-check-label" for="remove_image_url">Remove this image</label>
+                                                </div>
+                                                <span id="current-image-flag" class="badge bg-warning text-dark d-none">Marked for removal</span>
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
+                                @error('image_url')
+                                    <div class="text-danger small mt-1">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label fw-bold">Gallery Images</label>
+                                <div class="card bg-light border-dashed p-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-6">
+                                            <input type="file" name="gallery_images[]" class="form-control @error('gallery_images') is-invalid @enderror" multiple accept="image/*">
+                                            <div class="form-text mt-2">Add new photos to the gallery.</div>
+                                        </div>
+                                        <div class="col-md-6 border-start ps-md-4 mt-3 mt-md-0">
+                                            <div id="ai-gallery-tools" data-generate-url="{{ route('admin.ai.gallery') }}">
+                                                <div class="d-flex gap-2 mb-2">
+                                                    <div class="input-group input-group-sm" style="max-width: 120px;">
+                                                        <span class="input-group-text bg-white">Qty</span>
+                                                        <input type="number" id="ai-gallery-qty" class="form-control" value="2" min="1" max="4">
+                                                    </div>
+                                                    <button type="button" class="btn btn-primary btn-sm px-3" data-ai-gallery-action="generate">
+                                                        <i data-lucide="layout-grid" class="size-4 me-1"></i> AI Gallery
+                                                        <span class="spinner-border spinner-border-sm ms-2 d-none" data-spinner></span>
+                                                    </button>
+                                                </div>
+                                                <div id="ai-gallery-status" class="small d-none"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="generated-gallery-inputs"></div>
+                                    <div id="ai-gallery-preview" class="row g-2 mt-4 d-none text-center border-top pt-4">
+                                        <!-- JS will inject images here -->
+                                    </div>
+
+                                    @if($property->gallery_images)
+                                        <div class="mt-4 border-top pt-4">
+                                            <label class="form-label small fw-bold text-muted">Current Gallery</label>
+                                            <div class="d-flex gap-3 flex-wrap mt-1">
+                                                @php
+                                                    $gallery = json_decode($property->gallery_images, true);
+                                                    if (!is_array($gallery)) {
+                                                        $gallery = array_filter(explode(',', $property->gallery_images));
+                                                    }
+                                                @endphp
+                                                @foreach($gallery as $img)
+                                                    <div class="d-flex flex-column align-items-center gap-2 p-2 bg-white rounded shadow-sm border" data-gallery-item>
+                                                        <img src="{{ Str::startsWith($img, 'data:') ? $img : asset(trim($img)) }}" class="rounded" style="height: 100px; width: 100px; object-fit: cover;">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" name="remove_gallery_images[]" value="{{ trim($img) }}">
+                                                            <label class="form-check-label small">Remove</label>
+                                                        </div>
+                                                        <span class="badge bg-warning text-dark d-none" data-remove-flag>Removing</span>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
+                                @error('gallery_images')
+                                    <div class="text-danger small mt-1">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="mt-4 d-flex gap-2">

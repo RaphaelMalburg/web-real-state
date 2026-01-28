@@ -3,40 +3,44 @@
 @section('content')
 <div class="container my-5">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card border-danger shadow-sm">
-                <div class="card-header bg-danger text-white">
-                    <h5 class="mb-0">Confirm Removal</h5>
-                </div>
-                <div class="card-body">
-                    <p class="text-danger fw-bold">Are you sure you want to remove this property? This action cannot be undone.</p>
-                    <hr>
-                    <div class="row g-3">
-                        <div class="col-md-8">
-                            <label class="form-label">Property Title</label>
-                            <input type="text" class="form-control" value="{{ $property->title }}" disabled>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label">Type</label>
-                            <input type="text" class="form-control" value="{{ $property->type }}" disabled>
-                        </div>
-                        <div class="col-12">
-                            <label class="form-label">Address</label>
-                            <input type="text" class="form-control" value="{{ $property->address }}" disabled>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Price ($)</label>
-                            <input type="text" class="form-control" value="{{ number_format($property->price) }}" disabled>
+        <div class="col-md-6">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+                <div class="card-body p-5 text-center">
+                    <div class="bg-danger bg-opacity-10 rounded-circle p-4 d-inline-block mb-4">
+                        <i data-lucide="alert-triangle" class="size-12 text-danger"></i>
+                    </div>
+                    
+                    <h2 class="fw-bold text-dark mb-3">Delete Property?</h2>
+                    <p class="text-muted mb-5">You are about to remove <span class="fw-bold text-dark">"{{ $property->title }}"</span>. This action is permanent and cannot be undone.</p>
+
+                    <div class="bg-light rounded-4 p-4 mb-5 text-start">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="small text-muted fw-bold text-uppercase">Address</div>
+                                <div class="text-dark">{{ $property->address }}</div>
+                            </div>
+                            <div class="col-6">
+                                <div class="small text-muted fw-bold text-uppercase">Type</div>
+                                <div class="text-dark">{{ $property->type }}</div>
+                            </div>
+                            <div class="col-6">
+                                <div class="small text-muted fw-bold text-uppercase">Price</div>
+                                <div class="text-dark">${{ number_format($property->price) }}</div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="mt-4 d-flex gap-2">
+                    <div class="d-grid gap-3">
                         <form action="{{ route('admin.destroy', $property) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Confirm & Delete</button>
+                            <button type="submit" class="btn btn-danger btn-lg w-100 rounded-pill fw-bold py-3 shadow-sm">
+                                <i data-lucide="trash-2" class="size-5 me-2"></i> Confirm Deletion
+                            </button>
                         </form>
-                        <a href="{{ route('admin.index') }}" class="btn btn-outline-secondary">Cancel</a>
+                        <a href="{{ route('admin.index') }}" class="btn btn-outline-secondary btn-lg rounded-pill fw-bold py-3">
+                            No, Keep Property
+                        </a>
                     </div>
                 </div>
             </div>

@@ -12,9 +12,6 @@ class PropertySeeder extends Seeder
      */
     public function run(): void
     {
-        // Clear existing properties to avoid duplicates or outdated paths
-        Property::truncate();
-
         $properties = [
             [
                 'title' => 'Elite Luxury Penthouse',
@@ -67,7 +64,7 @@ class PropertySeeder extends Seeder
         ];
 
         foreach ($properties as $property) {
-            Property::create($property);
+            Property::updateOrCreate(['title' => $property['title']], $property);
         }
     }
 }

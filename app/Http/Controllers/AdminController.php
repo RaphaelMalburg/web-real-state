@@ -18,7 +18,15 @@ class AdminController extends Controller
         $bookings = Booking::with('property')->latest()->get();
         $inquiries = Inquiry::latest()->get();
 
-        return view('admin.index', compact('properties', 'bookings', 'inquiries'));
+        // Calculate Stats
+        $stats = [
+            'total_properties' => $properties->count(),
+            'total_inquiries' => $inquiries->count(),
+            'total_bookings' => $bookings->count(),
+            'market_value' => $properties->where('type', 'Sale')->sum('price'),
+        ];
+
+        return view('admin.index', compact('properties', 'bookings', 'inquiries', 'stats'));
     }
 
     public function create()
@@ -526,7 +534,7 @@ class AdminController extends Controller
             return null;
         }
 
-        $response = Http::timeout(90)->withHeaders([
+        $response = Http::timeout(120)->withHeaders([
             'Authorization' => 'Bearer '.$apiKey,
             'HTTP-Referer' => config('app.url'),
             'X-Title' => config('app.name'),
@@ -535,34 +543,35 @@ class AdminController extends Controller
             'messages' => [
                 ['role' => 'user', 'content' => $prompt],
             ],
-            'modalities' => ['image', 'text'],
-            'image_config' => [
-                'image_size' => env('OPENROUTER_IMAGE_SIZE', '512x512'),
-            ],
+            'modalities' => ['image'],
         ]);
 
         if (!$response->successful()) {
             \Illuminate\Support\Facades\Log::error('OpenRouter image request failed', [
                 'status' => $response->status(),
                 'body' => $response->body(),
+                'prompt' => $prompt
             ]);
             return null;
         }
 
-        $imageUrl = data_get($response->json(), 'choices.0.message.images.0.image_url.url');
+        $json = $response->json();
+        \Illuminate\Support\Facades\Log::debug('OpenRouter image response received', ['json' => $json]);
+
+        // Try various possible paths for the image URL based on OpenRouter/OpenAI multimodal response formats
+        $imageUrl = data_get($json, 'choices.0.message.images.0.image_url.url')
+                 ?? data_get($json, 'choices.0.message.images.0.imageUrl.url')
+                 ?? data_get($json, 'choices.0.message.images.0.image_url')
+                 ?? data_get($json, 'choices.0.message.images.0.imageUrl')
+                 ?? data_get($json, 'choices.0.message.content.0.image_url.url') // Multi-part content
+                 ?? data_get($json, 'data.0.url'); // Fallback for standard image generation endpoint if routed there
+
         if (!is_string($imageUrl) || $imageUrl === '') {
-            $imageUrl = data_get($response->json(), 'choices.0.message.images.0.imageUrl.url');
-        }
-        if (!is_string($imageUrl) || $imageUrl === '') {
-            $imageUrl = data_get($response->json(), 'choices.0.message.images.0.image_url');
-        }
-        if (!is_string($imageUrl) || $imageUrl === '') {
-            $imageUrl = data_get($response->json(), 'choices.0.message.images.0.imageUrl');
-        }
-        if (!is_string($imageUrl) || $imageUrl === '') {
+            \Illuminate\Support\Facades\Log::error('OpenRouter image URL could not be resolved from response', ['json' => $json]);
             return null;
         }
-        \Illuminate\Support\Facades\Log::info('OpenRouter image URL resolved', ['imageUrl' => $imageUrl]);
+
+        \Illuminate\Support\Facades\Log::info('OpenRouter image URL resolved', ['imageUrl' => substr($imageUrl, 0, 100) . '...']);
 
         if (str_starts_with($imageUrl, 'data:image/')) {
             $parts = explode(',', $imageUrl, 2);

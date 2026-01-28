@@ -7,6 +7,8 @@ mkdir -p storage/framework/cache storage/framework/views storage/framework/sessi
 # Run migrations
 echo "Running migrations..."
 php artisan migrate --force
+echo "Running seeders..."
+php artisan db:seed --force || echo "Seeding failed, but continuing deployment."
 php artisan storage:link || true
 
 # Fix permissions for SQLite and storage

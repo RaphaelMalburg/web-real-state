@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EstatePro Agency - Laravel Version</title>
+    <meta name="description" content="EstatePro Agency - Your trusted partner for luxury real estate, urban apartments, and modern homes. Buy, sell, or rent with confidence.">
+    <meta name="keywords" content="real estate, luxury homes, apartments for rent, houses for sale, property management">
+    <title>@yield('title', 'EstatePro Agency - Luxury Real Estate & Modern Living')</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Lucide Icons -->
@@ -127,6 +129,18 @@
                 const delay = Number.parseInt(toastEl.getAttribute('data-bs-delay') || '4500', 10);
                 const toast = new bootstrap.Toast(toastEl, { delay });
                 toast.show();
+            });
+
+            // Global Form Loading State
+            document.querySelectorAll('form').forEach(form => {
+                form.addEventListener('submit', function() {
+                    const submitBtn = this.querySelector('button[type="submit"]');
+                    if (submitBtn && !submitBtn.classList.contains('no-loader')) {
+                        const originalHtml = submitBtn.innerHTML;
+                        submitBtn.disabled = true;
+                        submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Processing...`;
+                    }
+                });
             });
         });
     </script>

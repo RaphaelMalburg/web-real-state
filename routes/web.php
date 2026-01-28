@@ -14,6 +14,7 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 Route::get('/gallery', [PropertyController::class, 'gallery'])->name('gallery');
+Route::get('/properties/{property}', [PropertyController::class, 'show'])->name('properties.show');
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');

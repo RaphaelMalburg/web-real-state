@@ -76,26 +76,79 @@ a:hover {
 }
 
 /* Hero Section */
-.hero-carousel img { 
-    height: 600px; 
-    object-fit: cover; 
+.hero-carousel img {
+    height: 650px;
+    object-fit: cover;
 }
-/* Overlay for better text readability */
-.hero-carousel .carousel-item::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(2, 6, 23, 0.55);
-    pointer-events: none;
+
+.hero-carousel .carousel-item {
+    transition: transform 1.2s cubic-bezier(0.7, 0, 0.3, 1);
 }
+
 .hero-carousel .carousel-caption {
     z-index: 10;
-    background: rgba(15, 23, 42, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(4px);
+    background: rgba(15, 23, 42, 0.3);
+    border: none;
+    backdrop-filter: blur(2px);
+    bottom: 40%;
+    left: 10%;
+    right: 10%;
+    padding: 2rem;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.hero-carousel .carousel-caption h3 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.hero-carousel .carousel-caption p {
+    font-size: 1.25rem;
+    opacity: 0.9;
+}
+
+/* Z-index for filter card overlapping hero */
+.mt-n5 {
+    margin-top: -5rem !important;
+}
+
+.z-index-10 {
+    position: relative;
+    z-index: 10;
+}
+
+.border-dashed {
+    border-style: dashed !important;
+    border-width: 2px !important;
+    border-color: #cbd5e1 !important;
+}
+
+.bg-light {
+    background-color: #f8fafc !important;
+}
+
+.size-4 {
+    width: 18px;
+    height: 18px;
+}
+.size-5 {
+    width: 20px;
+    height: 20px;
+}
+.size-6 {
+    width: 24px;
+    height: 24px;
+}
+.size-8 {
+    width: 32px;
+    height: 32px;
+}
+.size-12 {
+    width: 48px;
+    height: 48px;
 }
 
 .hero-carousel .carousel-indicators [data-bs-target] {
@@ -109,24 +162,63 @@ a:hover {
 
 /* Card Styles */
 .property-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     border: none;
-    overflow: hidden;
-}
-
-.property-card img { 
-    height: 200px; 
-    object-fit: cover; 
+    border-radius: 20px;
+    background: #ffffff;
 }
 
 .property-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12) !important;
 }
 
-.card {
-    border-radius: 14px;
-    border: 1px solid #e5e7eb;
+.property-image {
+    height: 240px;
+    object-fit: cover;
+    width: 100%;
+    transition: transform 0.6s ease;
+}
+
+.property-card:hover .property-image {
+    transform: scale(1.05);
+}
+
+.property-card .badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    border-radius: 8px;
+}
+
+.property-card .card-title {
+    font-size: 1.15rem;
+    letter-spacing: -0.2px;
+}
+
+.property-card .btn {
+    padding: 0.6rem 1.2rem;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.property-card .btn-outline-primary:hover {
+    background-color: #f0f7ff;
+    color: #1d4ed8;
+}
+
+.property-card .size-3 {
+    width: 14px;
+    height: 14px;
+}
+.property-card .size-4 {
+    width: 18px;
+    height: 18px;
+}
+
+.rounded-pill {
+    border-radius: 50rem !important;
 }
 
 .card-header.bg-dark {
@@ -238,22 +330,57 @@ a:hover {
 }
 
 /* Gallery Grid Styles */
-.gallery-card-img { 
-    height: 220px; 
+.gallery-card-img {
+    height: 220px;
     object-fit: cover;
-    width: 100%; 
+    width: 100%;
 }
 
 /* Footer */
-footer { 
-    background-color: #f8fafc; 
-    padding: 40px 0; 
-    margin-top: 50px; 
+footer {
+    background-color: #f8fafc;
+    padding: 40px 0;
+    margin-top: 50px;
 }
 
 /* Responsive utilities */
+@media (max-width: 991px) {
+    .hero-carousel .carousel-caption h3 {
+        font-size: 2.5rem;
+    }
+    .mt-n5 {
+        margin-top: -2rem !important;
+    }
+}
+
 @media (max-width: 768px) {
     .hero-carousel img {
+        height: 500px;
+    }
+    .hero-carousel .carousel-caption {
+        bottom: 30%;
+        padding: 1.5rem;
+    }
+    .hero-carousel .carousel-caption h3 {
+        font-size: 2rem;
+    }
+    .hero-carousel .carousel-caption p {
+        font-size: 1rem;
+    }
+    .property-image {
+        height: 200px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-carousel img {
         height: 400px;
+    }
+    .hero-carousel .carousel-caption h3 {
+        font-size: 1.5rem;
+    }
+    .container {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
     }
 }
