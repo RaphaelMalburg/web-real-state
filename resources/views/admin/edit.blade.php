@@ -106,13 +106,8 @@
                                     </div>
 
                                     <input type="hidden" name="generated_image_url" id="generated_image_url">
-                                    <div id="ai-image-preview" class="mt-4 d-none text-center border-top pt-4">
-                                        <div class="position-relative d-inline-block">
-                                            <img id="generated_image_preview" src="" alt="Generated property image" class="img-thumbnail shadow-sm" style="max-height: 240px;">
-                                            <div class="position-absolute top-0 start-100 translate-middle">
-                                                <span class="badge rounded-pill bg-success shadow">AI Generated</span>
-                                            </div>
-                                        </div>
+                                    <div id="ai-image-preview" class="row g-3 mt-4 d-none text-center border-top pt-4">
+                                        <!-- Unified preview for all AI generated images -->
                                     </div>
 
                                     @if($property->image_url)
@@ -160,8 +155,8 @@
                                     </div>
 
                                     <div id="generated-gallery-inputs"></div>
-                                    <div id="ai-gallery-preview" class="row g-2 mt-4 d-none text-center border-top pt-4">
-                                        <!-- JS will inject images here -->
+                                    <div id="ai-gallery-preview" class="row g-3 mt-4 d-none text-center border-top pt-4">
+                                        <!-- JS will inject interactive cards here -->
                                     </div>
 
                                     @if($property->gallery_images)
@@ -292,137 +287,115 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const imageTools = document.getElementById('ai-image-tools');
-        if (!imageTools) {
-            return;
-        }
-
-        const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
-        const imageButton = imageTools.querySelector('[data-ai-image-action="generate"]');
-        const styleInput = document.getElementById('ai-image-style');
-        const hiddenInput = document.getElementById('generated_image_url');
-        const previewWrapper = document.getElementById('ai-image-preview');
-        const previewImage = document.getElementById('generated_image_preview');
-        const fileInput = document.querySelector('input[name="image_url"]');
-        const removeCheckbox = document.getElementById('remove_image_url');
-        const currentImageWrapper = document.getElementById('current-image-wrapper');
-        const currentImageFlag = document.getElementById('current-image-flag');
-        const statusEl = document.getElementById('ai-image-status');
-
-        const setStatus = (message, variant) => {
-            if (!statusEl) {
-                return;
-            }
-            statusEl.className = `small mt-2 ${variant}`;
-            statusEl.textContent = message;
-            statusEl.classList.remove('d-none');
-        };
-
-        const getImagePayload = () => ({
-            title: document.querySelector('[name="title"]')?.value || '',
-            type: document.querySelector('[name="type"]')?.value || '',
-            price: document.querySelector('[name="price"]')?.value || '',
-            address: document.querySelector('[name="address"]')?.value || '',
-            bedrooms: document.querySelector('[name="bedrooms"]')?.value || '',
-            bathrooms: document.querySelector('[name="bathrooms"]')?.value || '',
-            sqft: document.querySelector('[name="sqft"]')?.value || '',
-            style: styleInput?.value || ''
-        });
-
-        imageButton?.addEventListener('click', async () => {
-            const url = imageTools.dataset.generateUrl;
-            if (!url) {
-                return;
-            }
-
-            imageButton.disabled = true;
-            imageButton.classList.add('disabled');
-            const spinner = imageButton.querySelector('[data-spinner]');
-            spinner?.classList.remove('d-none');
-            setStatus('Generating image...', 'text-muted');
-
-            try {
-                const response = await fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json',
-                        'X-CSRF-TOKEN': csrfToken || ''
-                    },
-                    body: JSON.stringify(getImagePayload())
-                });
-
-                const data = await response.json();
-                if (!response.ok) {
-                    throw new Error(data?.message || 'Unable to generate image.');
-                }
-
-                if (data?.url && data?.path) {
-                    previewImage.src = data.url;
-                    previewWrapper.classList.remove('d-none');
-                    hiddenInput.value = data.path;
-                    if (fileInput) {
-                        fileInput.value = '';
-                    }
-                    if (removeCheckbox) {
-                        removeCheckbox.checked = false;
-                    }
-                    if (currentImageWrapper) {
-                        currentImageWrapper.classList.remove('opacity-50');
-                    }
-                    if (currentImageFlag) {
-                        currentImageFlag.classList.add('d-none');
-                    }
-                    setStatus('Image generated.', 'text-success');
-                }
-            } catch (error) {
-                setStatus(error?.message || 'Unable to generate image.', 'text-danger');
-            } finally {
-                imageButton.disabled = false;
-                imageButton.classList.remove('disabled');
-                spinner?.classList.add('d-none');
-            }
-        });
-
-        removeCheckbox?.addEventListener('change', () => {
-            const isChecked = removeCheckbox.checked;
-            hiddenInput.value = '';
-            if (previewWrapper) {
-                previewWrapper.classList.add('d-none');
-            }
-            if (currentImageWrapper) {
-                currentImageWrapper.classList.toggle('opacity-50', isChecked);
-            }
-            if (currentImageFlag) {
-                currentImageFlag.classList.toggle('d-none', !isChecked);
-            }
-        });
-    });
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
         const galleryTools = document.getElementById('ai-gallery-tools');
-        if (!galleryTools) {
-            return;
-        }
+
+        if (!imageTools && !galleryTools) return;
 
         const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
-        const generateButton = galleryTools.querySelector('[data-ai-gallery-action="generate"]');
-        const qtyInput = document.getElementById('ai-gallery-qty');
-        const inputsContainer = document.getElementById('generated-gallery-inputs');
-        const previewContainer = document.getElementById('ai-gallery-preview');
-        const styleInput = document.getElementById('ai-image-style');
-        const statusEl = document.getElementById('ai-gallery-status');
+        const mainHiddenInput = document.getElementById('generated_image_url');
+        const galleryInputsContainer = document.getElementById('generated-gallery-inputs');
+        const imagePreview = document.getElementById('ai-image-preview');
+        const galleryPreview = document.getElementById('ai-gallery-preview');
 
-        const setStatus = (message, variant) => {
-            if (!statusEl) {
-                return;
+        // Track state
+        let currentMainPath = mainHiddenInput?.value || null;
+        const currentGalleryPaths = new Set();
+
+        const updateBadges = () => {
+            document.querySelectorAll('[data-generated-path]').forEach(card => {
+                const path = card.dataset.generatedPath;
+                const mainBadge = card.querySelector('[data-badge="main"]');
+                const galleryBadge = card.querySelector('[data-badge="gallery"]');
+                const mainBtn = card.querySelector('[data-action="set-main"]');
+                const galleryBtn = card.querySelector('[data-action="set-gallery"]');
+
+                if (path === currentMainPath) {
+                    mainBadge?.classList.remove('d-none');
+                    card.classList.add('border-primary');
+                    if (mainBtn) mainBtn.classList.replace('btn-outline-primary', 'btn-primary');
+                } else {
+                    mainBadge?.classList.add('d-none');
+                    card.classList.remove('border-primary');
+                    if (mainBtn) mainBtn.classList.replace('btn-primary', 'btn-outline-primary');
+                }
+
+                if (currentGalleryPaths.has(path)) {
+                    galleryBadge?.classList.remove('d-none');
+                    card.classList.add('border-success');
+                    if (galleryBtn) galleryBtn.classList.replace('btn-outline-success', 'btn-success');
+                } else {
+                    galleryBadge?.classList.add('d-none');
+                    card.classList.remove('border-success');
+                    if (galleryBtn) galleryBtn.classList.replace('btn-success', 'btn-outline-success');
+                }
+            });
+
+            // Update hidden inputs
+            if (mainHiddenInput) mainHiddenInput.value = currentMainPath || '';
+
+            if (galleryInputsContainer) {
+                galleryInputsContainer.innerHTML = '';
+                currentGalleryPaths.forEach(path => {
+                    const input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = 'generated_gallery_images[]';
+                    input.value = path;
+                    galleryInputsContainer.appendChild(input);
+                });
             }
-            statusEl.className = `small mt-2 ${variant}`;
-            statusEl.textContent = message;
-            statusEl.classList.remove('d-none');
         };
 
-        const getGalleryPayload = () => ({
+        const createCard = (imgData) => {
+            const col = document.createElement('div');
+            col.className = 'col-6 col-md-4 col-lg-3';
+            col.dataset.generatedPath = imgData.path;
+
+            col.innerHTML = `
+                <div class="card h-100 border shadow-sm position-relative overflow-hidden bg-white">
+                    <img src="${imgData.url}" class="card-img-top" style="height: 100px; object-fit: cover;">
+                    <div class="position-absolute top-0 start-0 p-1 d-flex flex-column gap-1">
+                        <span class="badge bg-primary d-none" data-badge="main">Main</span>
+                        <span class="badge bg-success d-none" data-badge="gallery">Gallery</span>
+                    </div>
+                    <div class="card-body p-2 d-flex flex-column gap-1">
+                        <button type="button" class="btn btn-outline-primary btn-xs py-1" data-action="set-main" style="font-size: 0.7rem;">
+                            Set Main
+                        </button>
+                        <button type="button" class="btn btn-outline-success btn-xs py-1" data-action="set-gallery" style="font-size: 0.7rem;">
+                            Add Gallery
+                        </button>
+                        <button type="button" class="btn btn-outline-danger btn-xs py-1" data-action="discard" style="font-size: 0.7rem;">
+                            Discard
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            col.querySelector('[data-action="set-main"]').onclick = () => {
+                currentMainPath = (currentMainPath === imgData.path) ? null : imgData.path;
+                updateBadges();
+            };
+
+            col.querySelector('[data-action="set-gallery"]').onclick = () => {
+                if (currentGalleryPaths.has(imgData.path)) {
+                    currentGalleryPaths.delete(imgData.path);
+                } else {
+                    currentGalleryPaths.add(imgData.path);
+                }
+                updateBadges();
+            };
+
+            col.querySelector('[data-action="discard"]').onclick = () => {
+                if (currentMainPath === imgData.path) currentMainPath = null;
+                currentGalleryPaths.delete(imgData.path);
+                col.remove();
+                updateBadges();
+            };
+
+            return col;
+        };
+
+        const getCommonPayload = () => ({
             title: document.querySelector('[name="title"]')?.value || '',
             type: document.querySelector('[name="type"]')?.value || '',
             price: document.querySelector('[name="price"]')?.value || '',
@@ -430,81 +403,107 @@
             bedrooms: document.querySelector('[name="bedrooms"]')?.value || '',
             bathrooms: document.querySelector('[name="bathrooms"]')?.value || '',
             sqft: document.querySelector('[name="sqft"]')?.value || '',
-            style: styleInput?.value || '',
-            quantity: qtyInput?.value || 2
+            style: document.getElementById('ai-image-style')?.value || ''
         });
 
-        generateButton?.addEventListener('click', async () => {
-            const url = galleryTools.dataset.generateUrl;
-            if (!url) {
-                return;
-            }
+        // Single Image Generation
+        imageTools?.querySelector('[data-ai-image-action="generate"]')?.addEventListener('click', async (e) => {
+            const btn = e.currentTarget;
+            const url = imageTools.dataset.generateUrl;
+            const statusEl = document.getElementById('ai-image-status');
+            const spinner = btn.querySelector('[data-spinner]');
 
-            generateButton.disabled = true;
-            generateButton.classList.add('disabled');
-            generateButton.textContent = 'Generating...';
-            const spinner = generateButton.querySelector('[data-spinner]');
+            btn.disabled = true;
             spinner?.classList.remove('d-none');
-            setStatus('Generating gallery images...', 'text-muted');
+            if (statusEl) {
+                statusEl.textContent = 'Generating main image...';
+                statusEl.className = 'small mt-2 text-muted';
+                statusEl.classList.remove('d-none');
+            }
 
             try {
                 const response = await fetch(url, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json',
-                        'X-CSRF-TOKEN': csrfToken || ''
-                    },
-                    body: JSON.stringify(getGalleryPayload())
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'X-CSRF-TOKEN': csrfToken },
+                    body: JSON.stringify(getCommonPayload())
                 });
-
                 const data = await response.json();
-                if (!response.ok) {
-                    throw new Error(data?.message || 'Unable to generate gallery images.');
+                if (!response.ok) throw new Error(data.message || 'Generation failed');
+
+                if (data.url && data.path) {
+                    const card = createCard(data);
+                    imagePreview.appendChild(card);
+                    imagePreview.classList.remove('d-none');
+                    // Auto-set as main if none exists
+                    if (!currentMainPath) currentMainPath = data.path;
+                    updateBadges();
+                    if (statusEl) {
+                        statusEl.textContent = 'Image generated! Choose how to use it below.';
+                        statusEl.className = 'small mt-2 text-success';
+                    }
                 }
-
-                if (data?.images && Array.isArray(data.images)) {
-                    data.images.forEach(img => {
-                        const input = document.createElement('input');
-                        input.type = 'hidden';
-                        input.name = 'generated_gallery_images[]';
-                        input.value = img.path;
-                        inputsContainer.appendChild(input);
-
-                        const previewWrapper = document.createElement('div');
-                        previewWrapper.className = 'd-flex flex-column align-items-center gap-1 position-relative';
-
-                        const imgEl = document.createElement('img');
-                        imgEl.src = img.url;
-                        imgEl.className = 'img-thumbnail';
-                        imgEl.style = 'height: 80px; width: 80px; object-fit: cover;';
-
-                        const removeBtn = document.createElement('button');
-                        removeBtn.type = 'button';
-                        removeBtn.className = 'btn btn-danger btn-sm p-0 rounded-circle position-absolute top-0 end-0';
-                        removeBtn.style = 'width: 20px; height: 20px; line-height: 1; transform: translate(30%, -30%);';
-                        removeBtn.innerHTML = '&times;';
-                        removeBtn.onclick = () => {
-                            previewWrapper.remove();
-                            input.remove();
-                        };
-
-                        previewWrapper.appendChild(imgEl);
-                        previewWrapper.appendChild(removeBtn);
-                        previewContainer.appendChild(previewWrapper);
-                    });
-                    setStatus('Gallery images generated.', 'text-success');
+            } catch (err) {
+                if (statusEl) {
+                    statusEl.textContent = err.message;
+                    statusEl.className = 'small mt-2 text-danger';
                 }
-            } catch (error) {
-                setStatus(error?.message || 'Unable to generate gallery images.', 'text-danger');
             } finally {
-                generateButton.disabled = false;
-                generateButton.classList.remove('disabled');
-                generateButton.textContent = 'Generate Gallery Images';
+                btn.disabled = false;
                 spinner?.classList.add('d-none');
             }
         });
 
+        // Gallery Generation
+        galleryTools?.querySelector('[data-ai-gallery-action="generate"]')?.addEventListener('click', async (e) => {
+            const btn = e.currentTarget;
+            const url = galleryTools.dataset.generateUrl;
+            const statusEl = document.getElementById('ai-gallery-status');
+            const spinner = btn.querySelector('[data-spinner]');
+            const qty = document.getElementById('ai-gallery-qty')?.value || 2;
+
+            btn.disabled = true;
+            spinner?.classList.remove('d-none');
+            if (statusEl) {
+                statusEl.textContent = `Generating ${qty} gallery images...`;
+                statusEl.className = 'small mt-2 text-muted';
+                statusEl.classList.remove('d-none');
+            }
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'X-CSRF-TOKEN': csrfToken },
+                    body: JSON.stringify({ ...getCommonPayload(), quantity: qty })
+                });
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.message || 'Generation failed');
+
+                if (data.images && Array.isArray(data.images)) {
+                    data.images.forEach(img => {
+                        const card = createCard(img);
+                        galleryPreview.appendChild(card);
+                        // Auto-add to gallery by default
+                        currentGalleryPaths.add(img.path);
+                    });
+                    galleryPreview.classList.remove('d-none');
+                    updateBadges();
+                    if (statusEl) {
+                        statusEl.textContent = 'Gallery images generated! You can reassign them if needed.';
+                        statusEl.className = 'small mt-2 text-success';
+                    }
+                }
+            } catch (err) {
+                if (statusEl) {
+                    statusEl.textContent = err.message;
+                    statusEl.className = 'small mt-2 text-danger';
+                }
+            } finally {
+                btn.disabled = false;
+                spinner?.classList.add('d-none');
+            }
+        });
+
+        // Existing gallery removal logic
         document.querySelectorAll('[data-gallery-item]').forEach((item) => {
             const checkbox = item.querySelector('input[type="checkbox"]');
             const flag = item.querySelector('[data-remove-flag]');
@@ -513,6 +512,17 @@
                 item.classList.toggle('opacity-50', isChecked);
                 flag?.classList.toggle('d-none', !isChecked);
             });
+        });
+
+        // Existing main image removal logic
+        const removeMainCheckbox = document.getElementById('remove_image_url');
+        const currentMainWrapper = document.getElementById('current-image-wrapper');
+        const currentMainFlag = document.getElementById('current-image-flag');
+
+        removeMainCheckbox?.addEventListener('change', () => {
+            const isChecked = removeMainCheckbox.checked;
+            if (currentMainWrapper) currentMainWrapper.classList.toggle('opacity-50', isChecked);
+            if (currentMainFlag) currentMainFlag.classList.toggle('d-none', !isChecked);
         });
     });
 </script>
